@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Кредитная карта</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .credit-card {
+        width: 328px;
+        height: 208px;
+        border-radius: 10px;
+        background: hsla(192, 80%, 51%, 1);
+        background: linear-gradient(
+          90deg,
+          hsla(192, 80%, 51%, 1) 0%,
+          hsla(355, 85%, 63%, 1) 100%
+        );
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1DBDE6", endColorstr="#F1515E", GradientType=1 );
+      }
+    </style>
+  </head>
+  <body>
+    <div class="credit-card"></div>
+    <script>
+      window.addEventListener("deviceorientation", function (event) {
+        var x = event.beta; // In degree in the range [-180,180]
+        var y = event.gamma; // In degree in the range [-90,90]
+        var card = document.querySelector(".credit-card");
+        card.style.transform =
+          "translate(" +
+          Math.min(Math.max(y, -20), 20) +
+          "px," +
+          Math.min(Math.max(x, -20), 20) +
+          "px)";
+        var beta = document.getElementById("beta");
+        beta.innerHTML = Math.round(x);
+        var gamma = document.getElementById("gamma");
+        gamma.innerHTML = Math.round(y);
+      });
+    </script>
+    <p>Beta: <span id="beta"></span></p>
+    <p>Gamma: <span id="gamma"></span></p>
+  </body>
+</html>
