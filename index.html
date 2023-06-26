@@ -128,22 +128,6 @@
         font-weight: bold;
         font-size: 14px;
       }
-
-     /* .blur-card {
-        position: absolute;
-        width: 208px;
-        height: 328px;
-        border-radius: 10px;
-        background: hsla(192, 80%, 51%, 1);
-        background: linear-gradient(
-          90deg,
-          hsla(192, 80%, 51%, 1) 0%,
-          hsla(355, 85%, 63%, 1) 100%
-        );
-        filter: blur(5px);
-        opacity: 0.7;
-        transition: 0.5s;
-      }*/
     </style>
   </head>
   <body>
@@ -160,8 +144,8 @@
       var blurCard = document.querySelector(".blur-card");
       var hcardW = card.offsetWidth / 2;
       var hcardH = card.offsetHeight / 2;
-      var maxXOff = 40;
-      var maxYOff = 40;
+      var maxXOff = 30;
+      var maxYOff = 30;
 
       function ready() {
         animate(card, blurCard);
@@ -173,7 +157,7 @@
             var accelerationX = event.accelerationIncludingGravity.x;
             var accelerationY = event.accelerationIncludingGravity.y;
             var xOff = clamp(-accelerationX * 8, -maxXOff, maxXOff);
-            var yOff = clamp(accelerationY * 8, -maxYOff, maxYOff);
+            var yOff = map(accelerationY, -9, 0, maxYOff, -maxYOff);
             animateMobile(card, blurCard, xOff, yOff);
             displayAxisValues(accelerationX, accelerationY);
           };
@@ -192,10 +176,10 @@
       function animateMobile(card, blurCard, xOff, yOff) {
         card.style.transition = "";
         card.style.transform =
-          "translateX(" + xOff + "px) translateY(" + yOff + "px)";
+          "translateX(" + xOff + "px) translateY(" + -yOff + "px)";
         blurCard.style.transition = "";
         blurCard.style.transform =
-          "translateX(" + -xOff + "px) translateY(" + -yOff + "px)";
+          "translateX(" + -xOff + "px) translateY(" + yOff + "px)";
       }
 
       function displayAxisValues(accelerationX, accelerationY) {
@@ -208,6 +192,14 @@
 
       function clamp(value, min, max) {
         return Math.max(min, Math.min(value, max));
+      }
+
+      function map(value, fromSource, toSource, fromTarget, toTarget) {
+        return (
+          ((value - fromSource) / (toSource - fromSource)) *
+            (toTarget - fromTarget) +
+          fromTarget
+        );
       }
     </script>
   </body>
