@@ -205,9 +205,6 @@
   </body>
 </html> -->
 
-
-
-
 <!-- V3 -->
 
 <!DOCTYPE html>
@@ -225,13 +222,13 @@
         width: 624px;
         height: 984px;
         border-radius: 10px;
-        background: hsla(192, 80%, 51%, 1);
+        background: rgb(8, 8, 120);
         background: linear-gradient(
-          90deg,
-          hsla(192, 80%, 51%, 1) 0%,
-          hsla(355, 85%, 63%, 1) 100%
+          0deg,
+          rgba(8, 8, 120, 1) 11%,
+          rgba(186, 0, 255, 1) 100%
         );
-        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1DBDE6", endColorstr="#F1515E", GradientType=1 );
+        /* filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1DBDE6", endColorstr="#F1515E", GradientType=1 ); */
         transition: 0.5s;
       }
 
@@ -272,8 +269,8 @@
           window.ondevicemotion = function (event) {
             var accelerationX = event.accelerationIncludingGravity.x;
             var accelerationY = event.accelerationIncludingGravity.y;
-            var xOff = clamp(-accelerationX * 8, -maxXOff, maxXOff);
-            var yOff = map(accelerationY, -9, 0, maxYOff, -maxYOff);
+            var xOff = clamp(-accelerationX * 50, -maxXOff, maxXOff);
+            var yOff = map(accelerationY, -50, 0, maxYOff, -maxYOff);
             animateMobile(card, blurCard, xOff, yOff);
             displayAxisValues(accelerationX, accelerationY);
           };
