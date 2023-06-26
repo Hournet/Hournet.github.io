@@ -270,7 +270,7 @@
             var accelerationX = event.accelerationIncludingGravity.x;
             var accelerationY = event.accelerationIncludingGravity.y;
             var xOff = clamp(-accelerationX * 50, -maxXOff, maxXOff);
-            var yOff = map(accelerationY, -50, 0, maxYOff, -maxYOff);
+            var yOff = map(accelerationY, -9, 0, maxYOff, -maxYOff);
             animateMobile(card, blurCard, xOff, yOff);
             displayAxisValues(accelerationX, accelerationY);
           };
