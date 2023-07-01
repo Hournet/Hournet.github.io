@@ -36,6 +36,10 @@
 body {
 	margin: 0;
 	padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 /* body:before {
@@ -100,9 +104,11 @@ html::-webkit-scrollbar-thumb {
 	margin: 20px auto 20px auto;
 	width: 250px;
 	height: 352px;
+    /* height: 32.6vh;
+    width: 13vw; */
 	max-width: 100%;
 	max-height: 100%;
-	box-shadow: rgba(0, 0, 0, 0.5) 0 30px 40px 0;
+	/* box-shadow: rgba(0, 0, 0, 0.5) 0 30px 40px 0; */
 	transition: 0.6s cubic-bezier(0.25, 1, 0.1, 1);
 }
 
