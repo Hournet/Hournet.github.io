@@ -136,12 +136,13 @@ html::-webkit-scrollbar-thumb {
 
 .card {
   /* display: inline-block; */
+  z-index: 999;
   transform: perspective(800px);
   transform-style: preserve-3d;
   border-radius: 10px;
   /* Rectangle 17 */
   background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
-  border-radius: 16px;
+  border-radius: 48px; 
   overflow: hidden;
   cursor: pointer;
   margin: 20px auto 20px auto;
@@ -212,3 +213,35 @@ html::-webkit-scrollbar-thumb {
   margin: auto;
 
 }
+
+.card_shadow {
+    z-index: 0;
+    /* transform: perspective(800px); */
+    /* transform-style: preserve-3d; */
+    border-radius: 10px;
+    /* Rectangle 17 */
+    background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
+    border-radius: 48px; 
+    overflow: hidden;
+    cursor: pointer;
+    margin: 20px auto 20px auto;
+    width: 660px;
+    height: 1056px;
+    max-width: 100%;
+    max-height: 100%;
+    filter: blur(20px);
+    transition: 0.6s cubic-bezier(0.25, 1, 0.1, 1);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      ". . chip nfc ."
+      ". . . . ."
+      ". . . . ."
+      ". . . . ."
+      ". .  .asd asd";
+    /* width: 220px;
+      height: 352px; */
+  }
