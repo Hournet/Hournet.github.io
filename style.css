@@ -219,7 +219,7 @@ z-index: 9;
 .card:after {
     content: "";
     z-index: 1;
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
