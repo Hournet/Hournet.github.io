@@ -210,110 +210,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 99vh;
-      }
-      .card {
-        position: relative;
-        width: 624px;
-        height: 984px;
-        border-radius: 60px;
-        background: rgb(8, 8, 120);
-        background: linear-gradient(
-          0deg,
-          rgba(8, 8, 120, 1) 11%,
-          rgba(186, 0, 255, 1) 100%
-        );
-        /* filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1DBDE6", endColorstr="#F1515E", GradientType=1 ); */
-        transition: 0.5s;
-      }
-
-      .axis-values {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-weight: bold;
-        font-size: 14px;
-      }
-    </style>
+<link rel="stylesheet" href="/qwerty/Hournet.github.io/style.css">
   </head>
   <body>
-    <div class="card" id="card">
-      <div class="axis-values" id="axisValues"></div>
+    <div class="wrapper">
+      <div id="card" class="card">
+        <!--     <p id="beta"></p>
+        <p id="gamma"></p> -->
+        <div id="cardBg" class="card-background">
+        </div>
+      </div>
     </div>
-    <div class="blur-card"></div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", ready);
-
-      var card = document.getElementById("card");
-      var axisValues = document.getElementById("axisValues");
-      var blurCard = document.querySelector(".blur-card");
-      var hcardW = card.offsetWidth / 2;
-      var hcardH = card.offsetHeight / 2;
-      var maxXOff = 80;
-      var maxYOff = 120;
-
-      function ready() {
-        animate(card, blurCard);
-      }
-
-      function animate(card, blurCard) {
-        if (window.DeviceMotionEvent) {
-          window.ondevicemotion = function (event) {
-            var accelerationX = event.accelerationIncludingGravity.x;
-            var accelerationY = event.accelerationIncludingGravity.y;
-            var xOff = clamp(-accelerationX * 50, -maxXOff, maxXOff);
-            var yOff = map(accelerationY, -9, 0, maxYOff, -maxYOff);
-            animateMobile(card, blurCard, xOff, yOff);
-            displayAxisValues(accelerationX, accelerationY);
-          };
-        }
-
-        card.addEventListener("mouseleave", function () {
-          setTimeout(() => {
-            card.style.transition = "0.5s";
-            card.style.transform = "translateX(0px) translateY(0px)";
-            blurCard.style.transition = "0.5s";
-            blurCard.style.transform = "translateX(0px) translateY(0px)";
-          }, 500);
-        });
-      }
-
-      function animateMobile(card, blurCard, xOff, yOff) {
-        card.style.transition = "";
-        card.style.transform =
-          "translateX(" + xOff + "px) translateY(" + -yOff + "px)";
-        blurCard.style.transition = "";
-        blurCard.style.transform =
-          "translateX(" + -xOff + "px) translateY(" + yOff + "px)";
-      }
-
-      function displayAxisValues(accelerationX, accelerationY) {
-        axisValues.textContent =
-          "Acceleration X: " +
-          accelerationX.toFixed(2) +
-          ", Acceleration Y: " +
-          accelerationY.toFixed(2);
-      }
-
-      function clamp(value, min, max) {
-        return Math.max(min, Math.min(value, max));
-      }
-
-      function map(value, fromSource, toSource, fromTarget, toTarget) {
-        return (
-          ((value - fromSource) / (toSource - fromSource)) *
-            (toTarget - fromTarget) +
-          fromTarget
-        );
-      }
-    </script>
   </body>
+  <script src="/qwerty/Hournet.github.io/index.js"></script>
 </html>
