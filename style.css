@@ -101,6 +101,12 @@ body {
     grid-area: asd;
     margin-left: 5px;
   }
+
+  .nfc {
+    grid-area: nfc;
+    margin-top: 14px;
+  }
+  
 }
 
 p {
