@@ -38,21 +38,16 @@ body {
 	padding: 0;
 }
 
-body:before {
+/* body:before {
 	z-index: -999;
 	position: absolute;
 	display: block;
 	left: 0;
 	right: 0;
 	top: 2vh;
-	text-align: center;
-	content: "Hover or Tilt (mobile devices only)";
-	font-size: 50px;
-	text-shadow: 1px 3px 5px rgba(0, 0, 0, 0.3);
-	font-family: "Great Vibes", cursive;
 	color: rgba(255, 255, 255, 0.8);
 	transition: 0.6s cubic-bezier(0.25, 1, 0.1, 1);
-}
+} */
 
 @media (max-width: 500px) {
 	body:before {
