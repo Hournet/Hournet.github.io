@@ -196,6 +196,7 @@ html::-webkit-scrollbar-thumb {
   margin: auto;
   /* margin-top: 28px; */
   grid-area: chip;
+  z-index: 9;
 }
 
 .payment-sys {
@@ -203,7 +204,7 @@ html::-webkit-scrollbar-thumb {
   height: 240px;
   grid-area: asd;
   margin: auto;
-
+z-index: 9;
   /* margin-left: 5px; */
 }
 .nfc {
@@ -211,19 +212,17 @@ html::-webkit-scrollbar-thumb {
   /* margin-top: 28px; */
   width: 80px;
   margin: auto;
+  z-index: 9;
 
 }
 
-.card::before {
+.card:after {
     content: "";
+    z-index: 1;
     position: absolute;
-    top: -50px;
-    left: -50px;
-    right: -50px;
-    bottom: -50px;
-    z-index: -1;
+    height: 100%;
+    width: 100%;
     background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
-    /* background-color: rgba(0, 0, 0, 0.5); */
     filter: blur(50px);
   }
 
