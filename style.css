@@ -189,8 +189,8 @@ html::-webkit-scrollbar-thumb {
 }
 
 .chip {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   /* margin-inline: auto; */
   margin: auto;
   /* margin-top: 28px; */
@@ -198,8 +198,8 @@ html::-webkit-scrollbar-thumb {
 }
 
 .payment-sys {
-  width: 160px;
-  height: 160px;
+  width: 240px;
+  height: 240px;
   grid-area: asd;
   margin: auto;
 
@@ -208,7 +208,7 @@ html::-webkit-scrollbar-thumb {
 .nfc {
   grid-area: nfc;
   /* margin-top: 28px; */
-  width: 60px;
+  width: 80px;
   margin: auto;
 
 }
