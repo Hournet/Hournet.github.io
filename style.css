@@ -53,13 +53,12 @@ body {
 	transition: 0.6s cubic-bezier(0.25, 1, 0.1, 1);
 } */
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
   .card {
-    /* display: inline-block; */
     transform: perspective(800px);
     transform-style: preserve-3d;
     border-radius: 10px;
-    /* Rectangle 17 */
+
     background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
     border-radius: 16px;
     overflow: hidden;
@@ -67,11 +66,8 @@ body {
     margin: 20px auto 20px auto;
     width: 220px;
     height: 352px;
-    /* height: 32.6vh;
-          width: 13vw; */
     max-width: 100%;
     max-height: 100%;
-    /* box-shadow: rgba(0, 0, 0, 0.5) 0 30px 40px 0; */
     transition: 0.6s cubic-bezier(0.25, 1, 0.1, 1);
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
@@ -83,8 +79,7 @@ body {
       ". . . . ."
       ". . . . ."
       ". .  .asd asd";
-    /* width: 220px;
-          height: 352px; */
+
   }
   .chip {
     width: 40px;
@@ -92,7 +87,6 @@ body {
     margin-inline: auto;
     margin-top: 14px;
     grid-area: chip;
-    /* display: block; */
   }
 
   .payment-sys {
@@ -106,8 +100,7 @@ body {
     grid-area: nfc;
     margin-top: 14px;
   }
-  
-}
+} */
 
 p {
   color: white;
@@ -199,18 +192,23 @@ html::-webkit-scrollbar-thumb {
   width: 80px;
   height: 80px;
   /* margin-inline: auto; */
-  margin-top: 28px;
+  margin: auto;
+  /* margin-top: 28px; */
   grid-area: chip;
-  /* display: block; */
 }
 
 .payment-sys {
   width: 160px;
   height: 160px;
   grid-area: asd;
-  margin-left: 5px;
+  margin: auto;
+
+  /* margin-left: 5px; */
 }
 .nfc {
   grid-area: nfc;
-  margin-top: 28px;
+  /* margin-top: 28px; */
+  width: 60px;
+  margin: auto;
+
 }
