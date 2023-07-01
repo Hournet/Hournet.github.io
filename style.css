@@ -102,8 +102,8 @@ html::-webkit-scrollbar-thumb {
   overflow: hidden;
   cursor: pointer;
   margin: 20px auto 20px auto;
-  width: 220px;
-  height: 352px;
+  width: 440px;
+  height: 704px;
   /* height: 32.6vh;
     width: 13vw; */
   max-width: 100%;
@@ -146,17 +146,17 @@ html::-webkit-scrollbar-thumb {
 }
 
 .chip {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   margin-inline: auto;
-  margin-top: 14px;
+  margin-top: 28px;
   grid-area: chip;
   /* display: block; */
 }
 
 .payment-sys {
-  width: 80px;
-  height: 80px;
+  width: 160px;
+  height: 160px;
   grid-area: asd;
   margin-left: 5px;
 }
