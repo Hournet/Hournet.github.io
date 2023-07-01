@@ -147,8 +147,8 @@ html::-webkit-scrollbar-thumb {
   overflow: hidden;
   cursor: pointer;
   margin: 20px auto 20px auto;
-  width: 440px;
-  height: 704px;
+  width: 660px;
+  height: 1056px;
   /* height: 32.6vh;
     width: 13vw; */
   max-width: 100%;
