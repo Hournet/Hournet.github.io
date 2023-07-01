@@ -156,16 +156,16 @@ html::-webkit-scrollbar-thumb {
   /* box-shadow: rgba(0, 0, 0, 0.5) 0 30px 40px 0; */
   transition: 0.6s cubic-bezier(0.25, 1, 0.1, 1);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    ". chip chip ."
-    ". . . ."
-    ". . . ."
-    ". . . ."
-    ". . asd asd";
+    ". . chip nfc ."
+    ". . . . ."
+    ". . . . ."
+    ". . . . ."
+    ". .  .asd asd";
   /* width: 220px;
     height: 352px; */
 }
@@ -193,7 +193,7 @@ html::-webkit-scrollbar-thumb {
 .chip {
   width: 80px;
   height: 80px;
-  margin-inline: auto;
+  /* margin-inline: auto; */
   margin-top: 28px;
   grid-area: chip;
   /* display: block; */
@@ -204,4 +204,8 @@ html::-webkit-scrollbar-thumb {
   height: 160px;
   grid-area: asd;
   margin-left: 5px;
+}
+.nfc{
+    grid-area: nfc;
+    margin-top: 28px;
 }
