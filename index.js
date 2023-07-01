@@ -21,17 +21,17 @@ function handleMotionEvent(event) {
   yPosition += movementY;
 
   // Ограничиваем движение по оси X до -100 и 100 пикселей
-  if (xPosition < -30) {
-    xPosition = -30;
-  } else if (xPosition > 30) {
-    xPosition = 30;
+  if (xPosition < -50) {
+    xPosition = -50;
+  } else if (xPosition > 50) {
+    xPosition = 50;
   }
 
   // Ограничиваем движение по оси Y до -100 и 100 пикселей
-  if (yPosition < -30) {
-    yPosition = -30;
-  } else if (yPosition > 30) {
-    yPosition = 30;
+  if (yPosition < -50) {
+    yPosition = -50;
+  } else if (yPosition > 50) {
+    yPosition = 50;
   }
 
   card.style.transform =

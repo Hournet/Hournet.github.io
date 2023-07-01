@@ -87,6 +87,21 @@ body {
     /* width: 220px;
           height: 352px; */
   }
+  .chip {
+    width: 40px;
+    height: 40px;
+    margin-inline: auto;
+    margin-top: 14px;
+    grid-area: chip;
+    /* display: block; */
+  }
+  
+  .payment-sys {
+    width: 80px;
+    height: 0px;
+    grid-area: asd;
+    margin-left: 5px;
+  }
 }
 
 p {
