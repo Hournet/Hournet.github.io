@@ -142,7 +142,7 @@ html::-webkit-scrollbar-thumb {
   border-radius: 10px;
   /* Rectangle 17 */
   background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
-  border-radius: 48px; 
+  border-radius: 48px;
   overflow: hidden;
   cursor: pointer;
   margin: 20px auto 20px auto;
@@ -164,7 +164,7 @@ html::-webkit-scrollbar-thumb {
     ". . . . ."
     ". . . . ."
     ". . . . ."
-    ". .  .asd asd";
+    ". . asd asd asd";
   /* width: 220px;
     height: 352px; */
 }
@@ -204,9 +204,10 @@ html::-webkit-scrollbar-thumb {
   height: 240px;
   grid-area: asd;
   margin: auto;
-z-index: 9;
+  z-index: 9;
   /* margin-left: 5px; */
 }
+
 .nfc {
   grid-area: nfc;
   /* margin-top: 28px; */
@@ -217,14 +218,14 @@ z-index: 9;
 }
 
 .card:after {
-    content: "";
-    z-index: 1;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
-    filter: blur(50px);
-  }
+  content: "";
+  z-index: 1;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(206.83deg, #ba00ff 13.08%, #0241f0 99.29%);
+  filter: blur(50px);
+}
 
 /* .shadow {
     z-index: -1;
