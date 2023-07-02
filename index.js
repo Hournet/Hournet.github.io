@@ -14,8 +14,8 @@ function handleMotionEvent(event) {
   var rotationRateBeta = event.rotationRate.beta;
   var rotationRateGamma = event.rotationRate.alpha;
 
-  var movementX = (accelerationX + rotationRateBeta / 100) * 5; // Множитель для увеличения скорости движения по оси X
-  var movementY = (accelerationY + rotationRateGamma / 100) * 5; // Множитель для увеличения скорости движения по оси Y
+  var movementX = (accelerationX + rotationRateBeta / 100) * 8; // Множитель для увеличения скорости движения по оси X
+  var movementY = (accelerationY + rotationRateGamma / 100) * 8; // Множитель для увеличения скорости движения по оси Y
 
   xPosition += movementX;
   yPosition += movementY;
