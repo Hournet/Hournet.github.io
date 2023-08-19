@@ -476,6 +476,6 @@ function correctVideoUrl(url) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const defaultVideoUrl = "https://ember.stream.voidboost.cc/65518da4d81a1ae1f2354cd01cfc8653:2023081918:NFo1cStPdTVEb0ZEdWVmYk5maUlQY0dZR2xHb2RzdVYzOGtPTk1KSENQa3pTbUNwWXJEbSt5dXpCTjM1clJWeEpKZDdGTGE3TENYc21EQlRBOElOWnc9PQ==/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
+  const defaultVideoUrl = "https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
   loadHlsVideo(defaultVideoUrl);
 });
