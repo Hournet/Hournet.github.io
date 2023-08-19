@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
+  <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls@5.15.0/dist/videojs-contrib-hls.min.js"></script>
+</head>
+<body>
+
+<video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360">
+  <source src="https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8" type="application/x-mpegURL">
+  <!-- Fallback for non-supported browsers -->
+  <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>
+</video>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var player = videojs('my-video');
+    
+    player.ready(function() {
+      player.play(); // Auto-play the video
+    });
+
+    player.on('error', function(error) {
+      console.log('Error:', error);
+    });
+  });
+</script>
+
+</body>
+</html>
