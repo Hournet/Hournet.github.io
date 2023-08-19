@@ -14,24 +14,24 @@ function handleMotionEvent(event) {
   var rotationRateBeta = event.rotationRate.beta;
   var rotationRateGamma = event.rotationRate.alpha;
 
-  var movementX = (accelerationX + rotationRateBeta / 100) * 5; // Множитель для увеличения скорости движения по оси X
-  var movementY = (accelerationY + rotationRateGamma / 100) * 5; // Множитель для увеличения скорости движения по оси Y
+  var movementX = (accelerationX + rotationRateBeta / 100) * 8; // Множитель для увеличения скорости движения по оси X
+  var movementY = (accelerationY + rotationRateGamma / 100) * 8; // Множитель для увеличения скорости движения по оси Y
 
   xPosition += movementX;
   yPosition += movementY;
 
   // Ограничиваем движение по оси X до -100 и 100 пикселей
-  if (xPosition < -50) {
-    xPosition = -50;
-  } else if (xPosition > 50) {
-    xPosition = 50;
+  if (xPosition < -100) {
+    xPosition = -100;
+  } else if (xPosition > 100) {
+    xPosition = 100;
   }
 
   // Ограничиваем движение по оси Y до -100 и 100 пикселей
-  if (yPosition < -50) {
-    yPosition = -50;
-  } else if (yPosition > 50) {
-    yPosition = 50;
+  if (yPosition < -100) {
+    yPosition = -100;
+  } else if (yPosition > 100) {
+    yPosition = 100;
   }
 
   card.style.transform =
