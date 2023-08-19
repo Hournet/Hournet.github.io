@@ -440,7 +440,7 @@ function loadMp4Video(url) {
 }
 
 //  HLS/m3u8
-const defaultVideoUrl = "https://ember.stream.voidboost.cc/b319be8c5c5d9ecd14d53525d779b706:2023081920:30dddc20-7ace-456c-980d-fcff47e49d29/8/9/1/7/8/5/xw58c.mp4:hls"; // Ваша ссылка по умолчанию
+const defaultVideoUrl = "https://zigzag.stream.voidboost.cc/94ef32ac87e2c386c1cf19fa31546692:2023082020:b977124e-afa4-438e-9ab4-646e3e4facb9/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
 
 function loadHlsVideo(url) {
   if (video.canPlayType('application/vnd.apple.mpegurl')) {
