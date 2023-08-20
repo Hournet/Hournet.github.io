@@ -450,6 +450,10 @@ function loadHlsVideo(url) {
   }
 }
 
+
+const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
+loadHlsVideo(defaultVideoUrl);
+
 // var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 // if (Hls.isSupported()) {
 //   var hls = new Hls();
@@ -496,7 +500,7 @@ videoUrlInput.addEventListener("click", function () {
 //   return url;
 // }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
-  loadHlsVideo(defaultVideoUrl);
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
+//   loadHlsVideo(defaultVideoUrl);
+// });
