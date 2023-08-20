@@ -440,11 +440,28 @@ function loadMp4Video(url) {
 }
 
 //  HLS/m3u8
-function loadHlsVideo(url) {
-  const hls = new Hls();
+// function loadHlsVideo(url) {
+//   const hls = new Hls();
 
-  hls.loadSource(url);
+//   hls.loadSource(url);
+//   hls.attachMedia(video);
+// }
+
+
+var videoSrc = 'https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8';
+if (Hls.isSupported()) {
+  var hls = new Hls();
+
+  // Используем функцию correctVideoUrl для обработки ссылки перед загрузкой
+  var correctedVideoSrc = correctVideoUrl(videoSrc);
+
+  hls.loadSource(correctedVideoSrc);
   hls.attachMedia(video);
+} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  // Используем функцию correctVideoUrl для обработки ссылки перед загрузкой
+  var correctedVideoSrc = correctVideoUrl(videoSrc);
+
+  video.src = correctedVideoSrc;
 }
 
 //  DASH
@@ -468,7 +485,7 @@ function correctVideoUrl(url) {
   return url;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const defaultVideoUrl = "https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
-  loadHlsVideo(defaultVideoUrl);
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const defaultVideoUrl = "https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
+//   loadHlsVideo(defaultVideoUrl);
+// });
