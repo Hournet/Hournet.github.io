@@ -439,28 +439,30 @@ function loadMp4Video(url) {
   video.load();
 }
 
-//  HLS/m3u8
-// function loadHlsVideo(url) {
-//   const hls = new Hls();
-
-//   hls.loadSource(url);
-//   hls.attachMedia(video);
-// }
-
-
-var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-if (Hls.isSupported()) {
-  var hls = new Hls();
-  
-  var correctedVideoSrc = correctVideoUrl(videoSrc);
-  
-  hls.loadSource(correctedVideoSrc);
-  hls.attachMedia(video);
-} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-  var correctedVideoSrc = correctVideoUrl(videoSrc);
-  
-  video.src = correctedVideoSrc;
+//HLS/m3u8
+function loadHlsVideo(url) {
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(url);
+    hls.attachMedia(video);
+  }else if (video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src = url;
+  }
 }
+
+// var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+// if (Hls.isSupported()) {
+//   var hls = new Hls();
+
+//   var correctedVideoSrc = correctVideoUrl(videoSrc);
+
+//   hls.loadSource(correctedVideoSrc);
+//   hls.attachMedia(video);
+// } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+//   var correctedVideoSrc = correctVideoUrl(videoSrc);
+
+//   video.src = correctedVideoSrc;
+// }
 
 function correctVideoUrl(url) {
   const regex = /^(.*?\.mp4:hls).*$/;
@@ -494,7 +496,7 @@ videoUrlInput.addEventListener("click", function () {
 //   return url;
 // }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   const defaultVideoUrl = "https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
-//   loadHlsVideo(defaultVideoUrl);
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
+  loadHlsVideo(defaultVideoUrl);
+});
