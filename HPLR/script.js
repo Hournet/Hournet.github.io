@@ -452,12 +452,12 @@ var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 if (Hls.isSupported()) {
   var hls = new Hls();
   
-  var correctedVideoSrc = correctVideoUrl(videoSrc);
+  var correctedVideoSrc = correctVideoUrl(video.src);
   
   hls.loadSource(correctedVideoSrc);
   hls.attachMedia(video);
 } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-  var correctedVideoSrc = correctVideoUrl(videoSrc);
+  var correctedVideoSrc = correctVideoUrl(video.src);
   
   video.src = correctedVideoSrc;
 }
