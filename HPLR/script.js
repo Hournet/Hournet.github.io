@@ -440,20 +440,21 @@ function loadMp4Video(url) {
 }
 
 //  HLS/m3u8
-const defaultVideoUrl = "https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
 
 function loadHlsVideo(url) {
-  if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  if (video.canPlayType("application/vnd.apple.mpegurl")) {
     video.src = defaultVideoUrl;
   } else if (Hls.isSupported()) {
     const hls = new Hls();
     const correctedVideoUrl = correctVideoUrl(url);
     hls.loadSource(correctedVideoUrl);
     hls.attachMedia(video);
-  } 
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const defaultVideoUrl =
+    "https://zigzag.stream.voidboost.cc/10fa7528af36d7323ee4db8bf7da998c:2023082018:cb366b6d-79cd-47ca-bcf2-b68f5972c15c/8/9/1/7/8/5/xw58c.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
   loadHlsVideo(defaultVideoUrl);
 });
 
@@ -477,17 +478,12 @@ videoUrlInput.addEventListener("click", function () {
 function correctVideoUrl(url) {
   const regex = /^(.*?\.mp4:hls).*$/;
   const match = url.match(regex);
-  
+
   if (match && match[1]) {
     return match[1] + ":manifest.m3u8";
   }
-  
+
   return url;
 }
 
-
-
-
-
 // const videoSrc = 'https://ember.stream.voidboost.cc/b319be8c5c5d9ecd14d53525d779b706:2023081920:30dddc20-7ace-456c-980d-fcff47e49d29/8/9/1/7/8/5/xw58c.mp4:hls';
-  
