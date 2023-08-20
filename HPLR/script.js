@@ -455,14 +455,10 @@ function loadMp4Video(url) {
 
 //HLS 2
 function loadHlsVideo(url) {
-  if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(url);
-    hls.attachMedia(video);
-  }
-  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = defaultVideoUrl;
-  }
+  const hls = new Hls();
+
+  hls.loadSource(url);
+  hls.attachMedia(video);
 }
 
 
