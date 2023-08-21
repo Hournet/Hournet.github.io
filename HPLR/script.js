@@ -454,20 +454,6 @@ function loadHlsVideo(url) {
 const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
 loadHlsVideo(defaultVideoUrl);
 
-// var videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-// if (Hls.isSupported()) {
-//   var hls = new Hls();
-
-//   var correctedVideoSrc = correctVideoUrl(videoSrc);
-
-//   hls.loadSource(correctedVideoSrc);
-//   hls.attachMedia(video);
-// } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-//   var correctedVideoSrc = correctVideoUrl(videoSrc);
-
-//   video.src = correctedVideoSrc;
-// }
-
 function correctVideoUrl(url) {
   const regex = /^(.*?\.mp4:hls).*$/;
   const match = url.match(regex);
