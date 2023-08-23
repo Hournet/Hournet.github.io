@@ -1,13 +1,13 @@
 @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap';
 
-*,
+/* *,
 *::before,
 *::after,
 *:focus {
   box-sizing: border-box;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-}
+} */
 
 /* video::-webkit-media-controls {
   display: none !important;
