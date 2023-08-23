@@ -399,6 +399,12 @@ document.addEventListener("keydown", (e) => {
 const videoUrlInput = document.querySelector(".video-url-input");
 
 videoUrlInput.addEventListener("input", loadVideoFromUrl);
+videoUrlInput.addEventListener("click", function () {
+  this.select();
+});
+
+const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
+loadHlsVideo(defaultVideoUrl);
 
 function loadVideoFromUrl() {
   const videoUrl = videoUrlInput.value;
@@ -450,9 +456,13 @@ function loadHlsVideo(url) {
   }
 }
 
+//  DASH
+function loadDashVideo(url) {
+  const player = dashjs.MediaPlayer().create();
+  player.initialize(video, url, true);
+}
 
-const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
-loadHlsVideo(defaultVideoUrl);
+
 
 function correctVideoUrl(url) {
   const regex = /^(.*?\.mp4:hls).*$/;
@@ -465,13 +475,5 @@ function correctVideoUrl(url) {
   return url;
 }
 
-//  DASH
-function loadDashVideo(url) {
-  const player = dashjs.MediaPlayer().create();
-  player.initialize(video, url, true);
-}
 
-videoUrlInput.addEventListener("click", function () {
-  this.select();
-});
 
