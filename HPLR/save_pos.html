@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+<html> 
+
+<head>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+</head>
+
+<body> 
+
+<video controls="" src="https://s3.amazonaws.com/akamai.netstorage/HD_downloads/Orion_SM.mp4?" data-origwidth="0" data-origheight="0" ></video>
+
+<video controls="" src="https://s3.amazonaws.com/akamai.netstorage/HD_downloads/rbsp_launch_480p.mp4?" data-origwidth="0" data-origheight="0" ></video>
+
+<script> 
+jQuery(document).ready(function( $ ) {
+
+    $("video").on("pause", function(event) {
+      // Save into local storage,if you change the browser will not work
+      localStorage.setItem(btoa(this.src), this.currentTime);
+    });
+
+    $("video").on("play", function(event) {
+        $storedtime = localStorage.getItem(btoa(this.src));
+        // Get the time from localStorage and play if not at the end.
+        if ($storedtime < this.duration) 
+            this.currentTime = $storedtime;
+
+        this.play();
+    });   
+	    
+    //if you close the window and video playing store the current time
+    $(window).on("unload", function(e) {
+       $("video").each(function(index, value) {
+         if ( ! this.paused ) {
+            localStorage.setItem(btoa(this.src), this.currentTime);
+         }
+      });
+    });
+    
+ });
+</script> 
+
+</body>
+
+</html>

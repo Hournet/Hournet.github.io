@@ -475,18 +475,16 @@ videoUrlInput.addEventListener("click", function () {
   this.select();
 });
 
-// function correctVideoUrl(url) {
-//   const regex = /^(.*?\.mp4:hls).*$/;
-//   const match = url.match(regex);
 
-//   if (match && match[1]) {
-//     return match[1] + ":manifest.m3u8";
-//   }
+//Save Position
+video.addEventListener("timeupdate", () => {
+  const currentTime = video.currentTime;
+  localStorage.setItem("videoPosition", currentTime);
+});
 
-//   return url;
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
-//   loadHlsVideo(defaultVideoUrl);
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  const savedPosition = localStorage.getItem("videoPosition");
+  if (savedPosition !== null) {
+    video.currentTime = parseFloat(savedPosition);
+  }
+});
