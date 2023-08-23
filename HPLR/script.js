@@ -475,16 +475,3 @@ videoUrlInput.addEventListener("click", function () {
   this.select();
 });
 
-
-//Save Position
-video.addEventListener("timeupdate", () => {
-  const currentTime = video.currentTime;
-  localStorage.setItem("videoPosition", currentTime);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const savedPosition = localStorage.getItem("videoPosition");
-  if (savedPosition !== null) {
-    video.currentTime = parseFloat(savedPosition);
-  }
-});
