@@ -32,13 +32,11 @@ timelineTouch.addEventListener("mousedown", (e) => {
 
 document.addEventListener("mousemove", (e) => {
   if (!touchInProgress) return;
-  handleTimelineTouchUpdate(e.touches[0]);
+  handleTimelineUpdate(e);
 });
 
 document.addEventListener("mouseup", () => {
-  console.log("test")
   if (touchInProgress) {
-    console.log("roma",touchScrubbingPosition)
     touchInProgress = false;
     video.currentTime = touchScrubbingPosition;
     touchScrubbingPosition = 0;
@@ -89,6 +87,8 @@ timelineTouch.addEventListener("touchend", () => {
   }
 });
 
+//
+//
 
 // speedBtn.addEventListener("click", changePlaybackSpeed);
 captionsBtn.addEventListener("click", toggleCaptions);
@@ -403,8 +403,7 @@ videoUrlInput.addEventListener("click", function () {
   this.select();
 });
 
-const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
-loadHlsVideo(defaultVideoUrl);
+
 
 function loadVideoFromUrl() {
   const videoUrl = videoUrlInput.value;
