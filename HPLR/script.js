@@ -38,11 +38,10 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
   console.log("test")
   if (touchInProgress) {
-    console.log("roma", touchScrubbingPosition )
+    console.log("roma",touchScrubbingPosition)
     touchInProgress = false;
     video.currentTime = touchScrubbingPosition;
     touchScrubbingPosition = 0;
-
   }
 });
 
