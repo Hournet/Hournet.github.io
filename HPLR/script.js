@@ -36,10 +36,12 @@ document.addEventListener("mousemove", (e) => {
 });
 
 document.addEventListener("mouseup", () => {
+  console.log("test")
   if (touchInProgress) {
     touchInProgress = false;
     video.currentTime = touchScrubbingPosition;
     touchScrubbingPosition = 0;
+    console.log("roma")
   }
 });
 
@@ -87,8 +89,6 @@ timelineTouch.addEventListener("touchend", () => {
   }
 });
 
-//
-//
 
 // speedBtn.addEventListener("click", changePlaybackSpeed);
 captionsBtn.addEventListener("click", toggleCaptions);

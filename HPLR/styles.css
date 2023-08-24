@@ -9,6 +9,8 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+
+
 body {
   font-family: poppins, sans-serif;
   margin: 0;
@@ -201,30 +203,13 @@ video {
   cursor: pointer;
 }
 
-/* Rectangle 39343 */
-/* .span {
-box-sizing: border-box;
-
-position: absolute;
-width: 100px;
-height: 30px;
-left: 1010px;
-top: 927px;
-
-background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.1));
-backdrop-filter: blur(21px);
-border-radius: 7px;
-} */
-
-
 .span {
   text-align: center;
   background: rgba(0, 4, 37, 0.288);
   padding: 5px 10px 4px ;
   box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
   transition: opacity .13s ease;
   position: absolute;
@@ -406,6 +391,7 @@ border-radius: 7px;
   transition: opacity .13s ease;
   /* background: url(matte_glass3.png) center; */
   backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
   border-radius: 10px;
 }
 
