@@ -32,7 +32,7 @@ timelineTouch.addEventListener("mousedown", (e) => {
 
 document.addEventListener("mousemove", (e) => {
   if (!touchInProgress) return;
-  handleTimelineUpdate(e);
+  handleTimelineTouchUpdate(e.touches[0]);
 });
 
 document.addEventListener("mouseup", () => {
