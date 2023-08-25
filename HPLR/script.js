@@ -147,9 +147,9 @@ video.addEventListener("volumechange", () => {
   videoContainer.dataset.volumeLevel = volumeLevel;
 });
 
-document.addEventListener("fullscreenchange", () => {
-  videoContainer.classList.toggle("expand", document.fullscreenElement);
-});
+// document.addEventListener("fullscreenchange", () => {
+//   videoContainer.classList.toggle("expand", document.fullscreenElement);
+// });
 
 video.addEventListener("enterpictureinpicture", () => {
   videoContainer.classList.add("mini-player");
@@ -266,9 +266,9 @@ function toggleMute() {
   video.muted = !video.muted;
 }
 
-function toggleTheaterMode() {
-  videoContainer.classList.toggle("theater");
-}
+// function toggleTheaterMode() {
+//   videoContainer.classList.toggle("theater");
+// }
 
 function toggleFullScreenMode() {
   document.querySelector(".full-screen-btn").classList.toggle("full-screen");
@@ -372,9 +372,6 @@ document.addEventListener("keydown", (e) => {
     case "с":
       toggleCaptions();
       break;
-    case "Escape":
-      exitFullscreen();
-      console.log("escape pressed")
   }
 });
 
@@ -443,12 +440,13 @@ function getVideoType(url) {
   }
 }
 
+//  MP4
 function loadMp4Video(url) {
   video.src = url;
   video.load();
 }
 
-//HLS/m3u8
+//  HLS/m3u8
 function loadHlsVideo(url) {
   if (Hls.isSupported()) {
     const hls = new Hls();
@@ -466,7 +464,7 @@ function loadDashVideo(url) {
 }
 
 
-
+//  Link Change
 function correctVideoUrl(url) {
   const regex = /^(.*?\.mp4:hls).*$/;
   const match = url.match(regex);

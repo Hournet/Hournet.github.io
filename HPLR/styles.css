@@ -131,15 +131,15 @@ video {
   display: block;
 }
 
+.full-screen-btn:not(.full-screen) .open {
+  display: none;
+}
+
 .full-screen-btn:not(.full-screen) .close {
   display: block;
 }
 
 .full-screen-btn.full-screen .close {
-  display: none;
-}
-
-.full-screen-btn:not(.full-screen) .open {
   display: none;
 }
 
