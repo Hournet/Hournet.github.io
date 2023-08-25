@@ -32,7 +32,7 @@ timelineTouch.addEventListener("mousedown", (e) => {
 
 document.addEventListener("mousemove", (e) => {
   if (!touchInProgress) return;
-  handleTimelineUpdate(e);
+  handleTimelineTouchUpdate(e);
 });
 
 document.addEventListener("mouseup", () => {
@@ -180,26 +180,27 @@ function toggleScrubbing(e) {
     }
   }
 
-  handleTimelineUpdate(e);
+  handleTimelineTouchUpdate(e);
+  // handleTimelineUpdate(e)
 }
 
-function handleTimelineUpdate(e) {
-  const rect = timelineContainer.getBoundingClientRect();
-  const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-  const previewImgNumber = Math.max(
-    1,
-    Math.floor((percent * video.duration) / 10)
-  );
-  const previewImgSrc = `/assets/previewImgs/preview${previewImgNumber}.jpg`;
-  previewImg.src = previewImgSrc;
-  timelineContainer.style.setProperty("--preview-position", percent);
+// function handleTimelineUpdate(e) {
+//   const rect = timelineContainer.getBoundingClientRect();
+//   const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+//   const previewImgNumber = Math.max(
+//     1,
+//     Math.floor((percent * video.duration) / 10)
+//   );
+//   const previewImgSrc = `/assets/previewImgs/preview${previewImgNumber}.jpg`;
+//   previewImg.src = previewImgSrc;
+//   timelineContainer.style.setProperty("--preview-position", percent);
 
-  if (isScrubbing) {
-    e.preventDefault();
-    thumbnailImg.src = previewImgSrc;
-    timelineContainer.style.setProperty("--progress-position", percent);
-  }
-}
+//   if (isScrubbing) {
+//     e.preventDefault();
+//     thumbnailImg.src = previewImgSrc;
+//     timelineContainer.style.setProperty("--progress-position", percent);
+//   }
+// }
 
 function handleTimelineTouchUpdate(touch) {
   if (!isScrubbing) return;
