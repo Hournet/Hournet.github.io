@@ -372,6 +372,9 @@ document.addEventListener("keydown", (e) => {
     case "с":
       toggleCaptions();
       break;
+    case "Escape":
+      exitFullscreen();
+      console.log()
   }
 });
 
