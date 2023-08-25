@@ -374,7 +374,7 @@ document.addEventListener("keydown", (e) => {
       break;
     case "Escape":
       exitFullscreen();
-      console.log()
+      console.log("escape pressed")
   }
 });
 
