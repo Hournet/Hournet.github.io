@@ -220,12 +220,11 @@ video {
   border-radius: 10px;
   transition: opacity .13s ease;
   position: absolute;
-
   top: -20px;
   font-size: 13px;
   color: #fff;
   pointer-events: none;
-  /* transform: translateX(0%); */
+  transform: translateX(-10%);
   z-index: 999;
 }
 

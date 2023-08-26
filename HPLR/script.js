@@ -40,7 +40,7 @@ document.addEventListener("mouseup", () => {
 });
 
 //timeLine show current time
-timelineTouch.addEventListener("mousemove", (e) => {
+timelineTouch.addEventListener("mousemove",(e) => {
   // let timelineWidth = timelineTouch.clientWidth;
   // offsetX =
 //   offsetX < 20
@@ -62,6 +62,18 @@ progressTime.innerText = formatDuration(percent);
   // const currentTime = percent * video.duration;
   // spanElement.textContent = formatDuration(currentTime);
 });
+
+// timelineTouch.addEventListener("touchmove",(e) => {
+// let offsetX = e.offsetX;
+// let timelineWidth = timelineTouch.clientWidth;
+
+// const percent = (offsetX / timelineWidth) * video.duration;
+// const progressTime = timelineTouch.querySelector(".span"); // Исправлено на ".span"
+// progressTime.style.left = `${offsetX}px`;
+// progressTime.innerText = formatDuration(percent);
+// });
+
+
 
 timelineTouch.addEventListener("click", (e) => {
   const rect = timelineTouch.getBoundingClientRect();
@@ -181,23 +193,23 @@ function toggleScrubbing(e) {
   // handleTimelineUpdate(e)
 }
 
-// function handleTimelineUpdate(e) {
-//   const rect = timelineContainer.getBoundingClientRect();
-//   const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-//   const previewImgNumber = Math.max(
-//     1,
-//     Math.floor((percent * video.duration) / 10)
-//   );
-//   const previewImgSrc = `/assets/previewImgs/preview${previewImgNumber}.jpg`;
-//   previewImg.src = previewImgSrc;
-//   timelineContainer.style.setProperty("--preview-position", percent);
+function handleTimelineUpdate(e) {
+  const rect = timelineContainer.getBoundingClientRect();
+  const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+  const previewImgNumber = Math.max(
+    1,
+    Math.floor((percent * video.duration) / 10)
+  );
+  const previewImgSrc = `/assets/previewImgs/preview${previewImgNumber}.jpg`;
+  previewImg.src = previewImgSrc;
+  timelineContainer.style.setProperty("--preview-position", percent);
 
-//   if (isScrubbing) {
-//     e.preventDefault();
-//     thumbnailImg.src = previewImgSrc;
-//     timelineContainer.style.setProperty("--progress-position", percent);
-//   }
-// }
+  if (isScrubbing) {
+    e.preventDefault();
+    thumbnailImg.src = previewImgSrc;
+    timelineContainer.style.setProperty("--progress-position", percent);
+  }
+}
 
 function handleTimelineTouchUpdate(touch) {
   if (!isScrubbing) return;
@@ -304,10 +316,10 @@ const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
 
 // Double Tap start
 
-// const videoElement = document.querySelector("video");
 let lastTapTime = 0;
 
 video.addEventListener("click", function (event) {
+
   const currentTime = new Date().getTime();
   if (currentTime - lastTapTime < 300) {
     const tapX = event.clientX;
