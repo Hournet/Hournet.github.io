@@ -14,15 +14,11 @@ const timelineContainer = document.querySelector(".timeline-container");
 const timelineTouch = document.querySelector(".timeline_touch");
 const video = document.querySelector("video");
 
+const spanElement = document.querySelector(".span");
+
 let isScrubbing = false;
 let touchInProgress = false;
 let touchScrubbingPosition = 0;
-
-// timelineContainer.addEventListener("mousemove", handleTimelineUpdate);
-// timelineContainer.addEventListener("mousedown", toggleScrubbing);
-// document.addEventListener("mouseup", (e) => {
-//   if (isScrubbing) toggleScrubbing(e)
-// });
 
 timelineTouch.addEventListener("mousedown", (e) => {
   isScrubbing = true;
@@ -36,7 +32,6 @@ document.addEventListener("mousemove", (e) => {
 });
 
 document.addEventListener("mouseup", () => {
-  
   if (touchInProgress) {
     touchInProgress = false;
     video.currentTime = touchScrubbingPosition;
@@ -45,20 +40,27 @@ document.addEventListener("mouseup", () => {
 });
 
 //timeLine show current time
-// timelineTouch.addEventListener("mousemove", (e) => {
-//   let timelineWidth = timelineTouch.clientWidth;
-//   let offsetX = e.offsetX;
-//   let percent = Math.floor((offsetX / timelineWidth) * video.duration);
-//   const progressTime = timelineWidth.querySelector("span");
-//   offsetX =
-//     offsetX < 20
-//       ? 20
-//       : offsetX > timelineWidth - 20
-//       ? timelineWidth - 20
-//       : offsetX;
-//   progressTime.style.left = `${offsetX}px`;
-//   progressTime.innerText = formatDuration(percent);
-// });
+timelineTouch.addEventListener("mousemove", (e) => {
+  // let timelineWidth = timelineTouch.clientWidth;
+let offsetX = e.offsetX;
+let timelineWidth = timelineTouch.clientWidth;
+offsetX =
+  offsetX < 20
+    ? 20
+    : offsetX > timelineWidth - 20
+    ? timelineWidth - 20
+    : offsetX;
+const percent = (offsetX / timelineWidth) * video.duration;
+const progressTime = timelineTouch.querySelector(".span"); // Исправлено на ".span"
+progressTime.style.left = `${offsetX}px`;
+progressTime.innerText = formatDuration(percent);
+
+
+  // const rect = timelineTouch.getBoundingClientRect();
+  // const percent = (e.clientX - rect.left) / rect.width;
+  // const currentTime = percent * video.duration;
+  // spanElement.textContent = formatDuration(currentTime);
+});
 
 timelineTouch.addEventListener("click", (e) => {
   const rect = timelineTouch.getBoundingClientRect();
@@ -88,7 +90,6 @@ timelineTouch.addEventListener("touchend", () => {
   }
 });
 
-
 // speedBtn.addEventListener("click", changePlaybackSpeed);
 captionsBtn.addEventListener("click", toggleCaptions);
 muteBtn.addEventListener("click", toggleMute);
@@ -114,12 +115,6 @@ video.addEventListener("play", () => {
 video.addEventListener("pause", () => {
   videoContainer.classList.add("paused");
 });
-
-// // Ожидание, когда метаданные видео будут доступны
-// video.addEventListener("loadedmetadata", () => {
-//   const duration = video.duration; // Получение длительности видео
-//   console.log("Длительность видео:", duration);
-// });
 
 video.addEventListener("loadeddata", () => {
   totalTimeElem.textContent = formatDuration(video.duration);
@@ -147,9 +142,10 @@ video.addEventListener("volumechange", () => {
   videoContainer.dataset.volumeLevel = volumeLevel;
 });
 
-// document.addEventListener("fullscreenchange", () => {
-//   videoContainer.classList.toggle("expand", document.fullscreenElement);
-// });
+document.addEventListener("fullscreenchange", () => {
+  const isFullScreen = document.fullscreenElement == null;
+  fullScreenBtn.classList.toggle("full-screen", isFullScreen);
+  });
 
 video.addEventListener("enterpictureinpicture", () => {
   videoContainer.classList.add("mini-player");
@@ -266,10 +262,6 @@ function toggleMute() {
   video.muted = !video.muted;
 }
 
-// function toggleTheaterMode() {
-//   videoContainer.classList.toggle("theater");
-// }
-
 function toggleFullScreenMode() {
   document.querySelector(".full-screen-btn").classList.toggle("full-screen");
   if (document.fullscreenElement == null) {
@@ -375,26 +367,6 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// // // Функция для проверки и скрытия кнопки управления громкостью
-// function checkAndHideVolumeButton() {
-//   const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-//   const isLandscapeOrientation = window.matchMedia("(orientation: landscape)").matches;
-
-//   if (isMobileDevice && isLandscapeOrientation) {
-//     const volumeContainer = document.querySelector(".volume-container");
-//     if (volumeContainer) {
-//       volumeContainer.style.display = "none";
-//     }
-//   }
-// }
-
-// // Вызов функции при загрузке и изменении ориентации
-// window.addEventListener("load", checkAndHideVolumeButton);
-// window.addEventListener("orientationchange", checkAndHideVolumeButton);
-// navigator.mediaSession.setActionHandler("", function () {
-//   /* Code excerpted. */
-// });
-
 // Добавление поля ввода для ссылки на видео файл
 const videoUrlInput = document.querySelector(".video-url-input");
 
@@ -452,7 +424,7 @@ function loadHlsVideo(url) {
     const hls = new Hls();
     hls.loadSource(url);
     hls.attachMedia(video);
-  }else if (video.canPlayType('application/vnd.apple.mpegurl')){
+  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
     video.src = url;
   }
 }
@@ -462,7 +434,6 @@ function loadDashVideo(url) {
   const player = dashjs.MediaPlayer().create();
   player.initialize(video, url, true);
 }
-
 
 //  Link Change
 function correctVideoUrl(url) {
@@ -475,6 +446,3 @@ function correctVideoUrl(url) {
 
   return url;
 }
-
-
-
