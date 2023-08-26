@@ -20,7 +20,7 @@ body {
   flex-direction: column;
   height: 100dvh;
   background: rgb(27, 32, 48);
-
+  overflow-x:hidden;
 }
 
 .video-container {

@@ -42,14 +42,15 @@ document.addEventListener("mouseup", () => {
 //timeLine show current time
 timelineTouch.addEventListener("mousemove", (e) => {
   // let timelineWidth = timelineTouch.clientWidth;
+  // offsetX =
+//   offsetX < 20
+//     ? 20
+//     : offsetX > timelineWidth - 20
+//     ? timelineWidth - 20
+//     : offsetX;
 let offsetX = e.offsetX;
 let timelineWidth = timelineTouch.clientWidth;
-offsetX =
-  offsetX < 20
-    ? 20
-    : offsetX > timelineWidth - 20
-    ? timelineWidth - 20
-    : offsetX;
+
 const percent = (offsetX / timelineWidth) * video.duration;
 const progressTime = timelineTouch.querySelector(".span"); // Исправлено на ".span"
 progressTime.style.left = `${offsetX}px`;
