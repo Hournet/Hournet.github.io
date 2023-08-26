@@ -48,13 +48,38 @@ timelineTouch.addEventListener("mousemove",(e) => {
 //     : offsetX > timelineWidth - 20
 //     ? timelineWidth - 20
 //     : offsetX;
-let offsetX = e.offsetX;
-let timelineWidth = timelineTouch.clientWidth;
+// let offsetX = e.offsetX;
+// let timelineWidth = timelineTouch.clientWidth;
 
-const percent = (offsetX / timelineWidth) * video.duration;
-const progressTime = timelineTouch.querySelector(".span"); // Исправлено на ".span"
-progressTime.style.left = `${offsetX}px`;
-progressTime.innerText = formatDuration(percent);
+// const percent = (offsetX / timelineWidth) * video.duration;
+// const progressTime = timelineTouch.querySelector(".span"); // Исправлено на ".span"
+// progressTime.style.left = `${offsetX}px`;
+// progressTime.innerText = formatDuration(percent);
+
+
+timelineTouch.addEventListener("mousemove", (e) => {
+  let offsetX = e.offsetX;
+  let timelineWidth = timelineTouch.clientWidth;
+
+  // Ограничиваем offsetX в диапазоне от 0 до timelineWidth
+  offsetX = Math.max(0, Math.min(offsetX, timelineWidth));
+
+  const percent = offsetX / timelineWidth;
+  const currentTime = percent * video.duration;
+
+  const progressTime = timelineTouch.querySelector(".span"); // Поправил на ".span"
+  const spanWidth = progressTime.clientWidth;
+  const maxLeft = timelineWidth - spanWidth;
+  let spanLeft = offsetX - spanWidth / 2;
+  
+  // Ограничиваем spanLeft в диапазоне от 0 до maxLeft
+  spanLeft = Math.max(0, Math.min(spanLeft, maxLeft));
+
+  progressTime.style.left = `${spanLeft}px`;
+  progressTime.innerText = formatDuration(currentTime);
+});
+
+
 
 
   // const rect = timelineTouch.getBoundingClientRect();
@@ -76,9 +101,12 @@ progressTime.innerText = formatDuration(percent);
 
 
 timelineTouch.addEventListener("click", (e) => {
-  const rect = timelineTouch.getBoundingClientRect();
-  const percent = (e.clientX - rect.left) / rect.width;
-  video.currentTime = percent * video.duration;
+  // Проверяем, является ли устройство мышью
+  if (e.pointerType === "mouse") {
+    const rect = timelineTouch.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    video.currentTime = percent * video.duration;
+  }
 });
 
 //drag timeline TouchScreen
