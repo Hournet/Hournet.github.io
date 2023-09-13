@@ -191,6 +191,7 @@ video {
   position: absolute;
   margin-bottom: 14px;
   user-select: none;
+  pointer-events: none;
 }
 
 .duration-container .separator {
@@ -224,7 +225,7 @@ video {
   font-size: 13px;
   color: #fff;
   pointer-events: none;
-  transform: translateX(-10%);
+  transform: translateX(50%);
   z-index: 999;
 }
 
@@ -281,7 +282,7 @@ video {
   top: -50%;
   left: calc(var(--progress-position) * 100%);
   background-color: #6643B8;
-
+  pointer-events: none;
   border-radius: 50%;
   transition: transform 50ms ease-in-out;
   aspect-ratio: 1 / 1;
