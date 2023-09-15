@@ -393,9 +393,6 @@ video {
   background: rgba(0, 4, 37, 0.288);
 
   box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.08);
-  /* background: rgba(0, 4, 37, 0.288); */
-  /* background: rgba(39, 0, 122, 0.288); */
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, .1); */
   transition: opacity .13s ease;
   /* background: url(matte_glass3.png) center; */
   backdrop-filter: blur(10px);
