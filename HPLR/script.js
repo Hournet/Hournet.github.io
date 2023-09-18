@@ -13,7 +13,6 @@ const videoContainer = document.querySelector(".video-container");
 const timelineContainer = document.querySelector(".timeline-container");
 const timelineTouch = document.querySelector(".timeline_touch");
 const video = document.querySelector("video");
-
 const spanElement = document.querySelector(".span");
 
 let isScrubbing = false;
@@ -65,7 +64,13 @@ timelineTouch.addEventListener("mousemove", (e) => {
 });
 
 //
+timelineTouch.addEventListener('mouseenter', () => {
+  spanElement.style.display = 'block';
+});
 
+timelineTouch.addEventListener('mouseleave', () => {
+  spanElement.style.display = 'none';
+});
 //
 
 // timelineTouch.addEventListener("touchmove",(e) => {
@@ -479,10 +484,3 @@ function correctVideoUrl(url) {
 
 
 
-timelineTouch.addEventListener('mouseenter', () => {
-  spanElement.style.display = 'block';
-});
-
-timelineTouch.addEventListener('mouseleave', () => {
-  spanElement.style.display = 'none';
-});

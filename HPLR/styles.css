@@ -1,5 +1,11 @@
 @import 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap';
 
+:root{
+  --main-color: #6643B8;
+}
+
+
+
 *,
 *::before,
 *::after,
@@ -102,6 +108,9 @@ video {
 }
 
 .video-controls-container .controls .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   color: inherit;
@@ -151,14 +160,17 @@ video {
 
 .video-container[data-volume-level="high"] .volume-high-icon {
   display: block;
+  width: inherit;
 }
 
 .video-container[data-volume-level="low"] .volume-low-icon {
   display: block;
+  width: inherit;
 }
 
 .video-container[data-volume-level="muted"] .volume-muted-icon {
   display: block;
+  width: inherit;
 }
 
 .volume-container {
@@ -200,7 +212,12 @@ video {
 }
 
 .video-container.captions .captions-btn {
-  border-bottom: 3px solid red;
+  border-bottom: 3px solid var(--main-color);
+  width: inherit;
+}
+
+.captions-btn img{
+  width: inherit;
 }
 
 .timeline_touch {
@@ -216,6 +233,7 @@ video {
   text-align: center;
   background: rgba(0, 4, 37, 0.288);
   padding: 5px 10px 4px;
+  /* width: 50px; */
   box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -375,11 +393,17 @@ video {
   }
 }
 
-
+.playback-speed{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* speed button */
 .playback-content {
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative
 }
 
