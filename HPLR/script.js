@@ -41,22 +41,6 @@ document.addEventListener("mouseup", () => {
 
 //timeLine show current time
 timelineTouch.addEventListener("mousemove",(e) => {
-  // let timelineWidth = timelineTouch.clientWidth;
-  // offsetX =
-//   offsetX < 20
-//     ? 20
-//     : offsetX > timelineWidth - 20
-//     ? timelineWidth - 20
-//     : offsetX;
-// let offsetX = e.offsetX;
-// let timelineWidth = timelineTouch.clientWidth;
-
-// const percent = (offsetX / timelineWidth) * video.duration;
-// const progressTime = timelineTouch.querySelector(".span"); // Исправлено на ".span"
-// progressTime.style.left = `${offsetX}px`;
-// progressTime.innerText = formatDuration(percent);
-
-
 timelineTouch.addEventListener("mousemove", (e) => {
   let offsetX = e.offsetX;
   let timelineWidth = timelineTouch.clientWidth;
@@ -78,15 +62,11 @@ timelineTouch.addEventListener("mousemove", (e) => {
   progressTime.style.left = `${spanLeft}px`;
   progressTime.innerText = formatDuration(currentTime);
 });
-
-
-
-
-  // const rect = timelineTouch.getBoundingClientRect();
-  // const percent = (e.clientX - rect.left) / rect.width;
-  // const currentTime = percent * video.duration;
-  // spanElement.textContent = formatDuration(currentTime);
 });
+
+//
+
+//
 
 // timelineTouch.addEventListener("touchmove",(e) => {
 // let offsetX = e.offsetX;
@@ -487,3 +467,22 @@ function correctVideoUrl(url) {
 
   return url;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+timelineTouch.addEventListener('mouseenter', () => {
+  spanElement.style.display = 'block';
+});
+
+timelineTouch.addEventListener('mouseleave', () => {
+  spanElement.style.display = 'none';
+});

@@ -212,6 +212,7 @@ video {
 }
 
 .span {
+  display: none;
   text-align: center;
   background: rgba(0, 4, 37, 0.288);
   padding: 5px 10px 4px;
@@ -228,6 +229,9 @@ video {
   transform: translateX(50%);
   z-index: 999;
 }
+
+
+
 
 .timeline-container {
   width: 100%;
