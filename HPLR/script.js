@@ -128,8 +128,15 @@ fullScreenBtn.addEventListener("click", toggleFullScreenMode);
 miniPlayerBtn.addEventListener("click", toggleMiniPlayerMode);
 
 playPauseBtn.addEventListener("click", togglePlay);
+// video.addEventListener("click", (e) => {
+//   if (e.pointerType === "mouse") {
+//     togglePlay();
+//   }
+// });
+
 video.addEventListener("click", (e) => {
-  if (e.pointerType === "mouse") {
+  const isMouseClick = e.type === "click" && e.detail === 1;
+  if (isMouseClick) {
     togglePlay();
   }
 });
@@ -477,9 +484,14 @@ function correctVideoUrl(url) {
 
 
 
+if (localStorage.getItem('videoPosition')) {
+  // Устанавливаем текущее время видео из localStorage
+  video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
+}
 
-
-
+video.addEventListener("timeupdate", () => {
+  localStorage.setItem('videoPosition', video.currentTime.toString());
+});
 
 
 
