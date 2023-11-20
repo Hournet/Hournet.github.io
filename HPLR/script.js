@@ -408,8 +408,8 @@ videoUrlInput.addEventListener("click", function () {
   this.select();
 });
 
-// const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
-const defaultVideoUrl = "https://minos.stream.voidboost.cc/0eaff93214086a1c6cd69dde6302d8b4:2023111915:NFo1cStPdTVEb0ZEdWVmYk5maUlQWXluMnk4cDRnd0dsWGdRSFUxMEdxOXJpVzQ1SmlTRzl5L1NCMnAwYytsbjY1YkRKRExCbnlXYzVMRUkrRit2Unc9PQ==/9/2/4/3/2/1/qvrbx.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
+const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
+// const defaultVideoUrl = "https://minos.stream.voidboost.cc/0eaff93214086a1c6cd69dde6302d8b4:2023111915:NFo1cStPdTVEb0ZEdWVmYk5maUlQWXluMnk4cDRnd0dsWGdRSFUxMEdxOXJpVzQ1SmlTRzl5L1NCMnAwYytsbjY1YkRKRExCbnlXYzVMRUkrRit2Unc9PQ==/9/2/4/3/2/1/qvrbx.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
 
 loadHlsVideo(defaultVideoUrl);
 function loadVideoFromUrl() {
