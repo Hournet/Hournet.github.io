@@ -408,9 +408,10 @@ videoUrlInput.addEventListener("click", function () {
   this.select();
 });
 
-const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
-loadHlsVideo(defaultVideoUrl);
+// const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
+const defaultVideoUrl = "https://minos.stream.voidboost.cc/0eaff93214086a1c6cd69dde6302d8b4:2023111915:NFo1cStPdTVEb0ZEdWVmYk5maUlQWXluMnk4cDRnd0dsWGdRSFUxMEdxOXJpVzQ1SmlTRzl5L1NCMnAwYytsbjY1YkRKRExCbnlXYzVMRUkrRit2Unc9PQ==/9/2/4/3/2/1/qvrbx.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
 
+loadHlsVideo(defaultVideoUrl);
 function loadVideoFromUrl() {
   const videoUrl = videoUrlInput.value;
   const correctedVideoUrl = correctVideoUrl(videoUrl);
@@ -484,7 +485,8 @@ function correctVideoUrl(url) {
 
 
 
-if (localStorage.getItem('videoPosition')) {
+ // Проверяем, есть ли сохраненная позиция в localStorage
+ if (localStorage.getItem('videoPosition')) {
   // Устанавливаем текущее время видео из localStorage
   video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
 }
@@ -494,5 +496,37 @@ video.addEventListener("timeupdate", () => {
 });
 
 
+//  // Загружаем прогресс при старте
+//  video.addEventListener('loadedmetadata', function() {
+//   const videoId = generateVideoId(video.src);
+//   const progress = getProgress(videoId);
+//   if (progress !== null) {
+//     video.currentTime = progress;
+//   }
+//   console.log('Loaded progress:', progress);
+// });
 
+// // Сохраняем прогресс при изменении времени видео
+// video.addEventListener('timeupdate', function() {
+//   const videoId = generateVideoId(video.src);
+//   saveProgress(videoId, video.currentTime);
+// });
 
+// console.log('Saved progress:', getProgress(generateVideoId(video.src)));
+
+// // Функция для сохранения прогресса
+// function saveProgress(videoId, progress) {
+//   localStorage.setItem(`videoProgress_${videoId}`, progress.toString());
+// }
+
+// // Функция для получения прогресса
+// function getProgress(videoId) {
+//   const progress = localStorage.getItem(`videoProgress_${videoId}`);
+//   return progress !== null ? parseFloat(progress) : null;
+// }
+
+// // Функция для генерации идентификатора видео
+// function generateVideoId(videoSrc) {
+//   const url = new URL(videoSrc);
+//   return url.pathname + url.search;
+// }
