@@ -191,7 +191,7 @@ video {
 
 .volume-container:hover .volume-slider,
 .volume-slider:focus-within {
-  /* width: 100px; */
+  width: 100px;
   transform: scaleX(1);
 }
 
