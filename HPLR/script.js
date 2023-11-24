@@ -1,3 +1,9 @@
+// Добавляем библиотеку для генерации UUID
+// const { v4: uuidv4 } = require('uuid');
+// uuidv4();
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+
+
 const playPauseBtn = document.querySelector(".play-pause-btn");
 const fullScreenBtn = document.querySelector(".full-screen-btn");
 const miniPlayerBtn = document.querySelector(".mini-player-btn");
@@ -401,6 +407,7 @@ document.addEventListener("keydown", (e) => {
 });
 
 // Добавление поля ввода для ссылки на видео файл
+
 const videoUrlInput = document.querySelector(".video-url-input");
 
 videoUrlInput.addEventListener("input", loadVideoFromUrl);
@@ -409,29 +416,71 @@ videoUrlInput.addEventListener("click", function () {
 });
 
 const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // Ваша ссылка по умолчанию
-// const defaultVideoUrl = "https://minos.stream.voidboost.cc/0eaff93214086a1c6cd69dde6302d8b4:2023111915:NFo1cStPdTVEb0ZEdWVmYk5maUlQWXluMnk4cDRnd0dsWGdRSFUxMEdxOXJpVzQ1SmlTRzl5L1NCMnAwYytsbjY1YkRKRExCbnlXYzVMRUkrRit2Unc9PQ==/9/2/4/3/2/1/qvrbx.mp4:hls:manifest.m3u8"; // Ваша ссылка по умолчанию
 
 loadHlsVideo(defaultVideoUrl);
 function loadVideoFromUrl() {
   const videoUrl = videoUrlInput.value;
+  let videoId;
+
+  // Check if the video URL has an associated ID in local storage
+  const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+  if (storedVideoIds[videoUrl]) {
+    videoId = storedVideoIds[videoUrl];
+  } else {
+    // Generate a new video ID
+    videoId = uuidv4();
+
+    // Save the new video ID to local storage
+    saveVideoIdToLocalstorage(videoUrl, videoId);
+  }
+
   const correctedVideoUrl = correctVideoUrl(videoUrl);
   const videoType = getVideoType(correctedVideoUrl);
 
   if (videoType === "mp4") {
-    loadMp4Video(correctedVideoUrl);
+    loadMp4Video(correctedVideoUrl, videoId);
   } else if (videoType === "m3u8") {
-    loadHlsVideo(correctedVideoUrl);
+    loadHlsVideo(correctedVideoUrl, videoId);
   } else if (videoType === "mpd") {
-    loadDashVideo(correctedVideoUrl);
+    loadDashVideo(correctedVideoUrl, videoId);
   } else {
     console.error("Unsupported video format");
   }
 
   video.addEventListener("loadedmetadata", () => {
-    video.pause();
+    // Check if video progress is stored in local storage
+    const storedVideoProgress = JSON.parse(localStorage.getItem("videoProgress")) || {};
+    if (storedVideoProgress[videoUrl]) {
+      // Restore video progress from local storage
+      video.currentTime = parseFloat(storedVideoProgress[videoUrl]);
+    } else {
+      video.pause();
+    }
   });
+
+  console.log(`Video URL: ${videoUrl}, Video ID: ${videoId}`);
 }
 
+function saveVideoIdToLocalstorage(videoUrl, videoId) {
+  // Retrieve existing video IDs from local storage
+  const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+
+  // Save the new video ID
+  storedVideoIds[videoUrl] = videoId;
+
+  // Update local storage with the new video IDs
+  localStorage.setItem("videoIds", JSON.stringify(storedVideoIds));
+}
+
+video.addEventListener("timeupdate", () => {
+  // Save the video progress to local storage
+  const videoUrl = videoUrlInput.value;
+  const storedVideoProgress = JSON.parse(localStorage.getItem("videoProgress")) || {};
+  storedVideoProgress[videoUrl] = video.currentTime.toString();
+  localStorage.setItem("videoProgress", JSON.stringify(storedVideoProgress));
+});
+
+//
 function getVideoType(url) {
   if (url.endsWith(".mp4")) {
     return "mp4";
@@ -496,37 +545,6 @@ video.addEventListener("timeupdate", () => {
 });
 
 
-//  // Загружаем прогресс при старте
-//  video.addEventListener('loadedmetadata', function() {
-//   const videoId = generateVideoId(video.src);
-//   const progress = getProgress(videoId);
-//   if (progress !== null) {
-//     video.currentTime = progress;
-//   }
-//   console.log('Loaded progress:', progress);
-// });
+// import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+// console.log(uuidv4());
 
-// // Сохраняем прогресс при изменении времени видео
-// video.addEventListener('timeupdate', function() {
-//   const videoId = generateVideoId(video.src);
-//   saveProgress(videoId, video.currentTime);
-// });
-
-// console.log('Saved progress:', getProgress(generateVideoId(video.src)));
-
-// // Функция для сохранения прогресса
-// function saveProgress(videoId, progress) {
-//   localStorage.setItem(`videoProgress_${videoId}`, progress.toString());
-// }
-
-// // Функция для получения прогресса
-// function getProgress(videoId) {
-//   const progress = localStorage.getItem(`videoProgress_${videoId}`);
-//   return progress !== null ? parseFloat(progress) : null;
-// }
-
-// // Функция для генерации идентификатора видео
-// function generateVideoId(videoSrc) {
-//   const url = new URL(videoSrc);
-//   return url.pathname + url.search;
-// }

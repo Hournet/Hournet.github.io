@@ -179,6 +179,21 @@ video {
   display: none;
 }
 
+/* input[type=range]::-webkit-slider-runnable-track {
+  width: 0;
+  height: 5px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+  accent-color: #6643B8;
+  background: #6643B8;
+} */
+
+
+/* */
+
+/*  */
+
 .volume-slider {
   width: 0;
   height: 5px;
@@ -188,6 +203,8 @@ video {
   accent-color: #6643B8;
   background: #6643B8;
 }
+
+
 
 .volume-container:hover .volume-slider,
 .volume-slider:focus-within {
