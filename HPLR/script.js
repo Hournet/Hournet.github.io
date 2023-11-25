@@ -450,6 +450,7 @@ function loadVideoFromUrl() {
   video.addEventListener("loadedmetadata", () => {
     // Check if video progress is stored in local storage
     const storedVideoProgress = JSON.parse(localStorage.getItem("videoProgress")) || {};
+    console.log(storedVideoProgress)
     if (storedVideoProgress[videoUrl]) {
       // Restore video progress from local storage
       video.currentTime = parseFloat(storedVideoProgress[videoUrl]);
