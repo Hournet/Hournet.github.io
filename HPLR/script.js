@@ -446,11 +446,18 @@ function loadVideoFromUrl() {
   } else {
     console.error("Unsupported video format");
   }
-
+  document.onload(() => {
+    const videoUrl = videoUrlInput.value;
+    const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+    if(videoUrl == '') {
+      video.currentTime = storedVideoIds[defaultVideoUrl]
+    } else {
+      video.currentTime = storedVideoIds[videoUrl]
+    }
+  })
   video.addEventListener("loadedmetadata", () => {
     // Check if video progress is stored in local storage
     const storedVideoProgress = JSON.parse(localStorage.getItem("videoProgress")) || {};
-    console.log(storedVideoProgress)
     if (storedVideoProgress[videoUrl]) {
       // Restore video progress from local storage
       video.currentTime = parseFloat(storedVideoProgress[videoUrl]);
@@ -536,14 +543,14 @@ function correctVideoUrl(url) {
 
 
  // Проверяем, есть ли сохраненная позиция в localStorage
-//  if (localStorage.getItem('videoPosition')) {
-//   // Устанавливаем текущее время видео из localStorage
-//   video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
-// }
+ if (localStorage.getItem('videoPosition')) {
+  // Устанавливаем текущее время видео из localStorage
+  video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
+}
 
-// video.addEventListener("timeupdate", () => {
-//   localStorage.setItem('videoPosition', video.currentTime.toString());
-// });
+video.addEventListener("timeupdate", () => {
+  localStorage.setItem('videoPosition', video.currentTime.toString());
+});
 
 
 // import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
