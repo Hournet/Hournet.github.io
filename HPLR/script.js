@@ -536,14 +536,14 @@ function correctVideoUrl(url) {
 
 
  // Проверяем, есть ли сохраненная позиция в localStorage
- if (localStorage.getItem('videoPosition')) {
-  // Устанавливаем текущее время видео из localStorage
-  video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
-}
+//  if (localStorage.getItem('videoPosition')) {
+//   // Устанавливаем текущее время видео из localStorage
+//   video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
+// }
 
-video.addEventListener("timeupdate", () => {
-  localStorage.setItem('videoPosition', video.currentTime.toString());
-});
+// video.addEventListener("timeupdate", () => {
+//   localStorage.setItem('videoPosition', video.currentTime.toString());
+// });
 
 
 // import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
