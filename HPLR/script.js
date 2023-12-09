@@ -1,7 +1,7 @@
 // Добавляем библиотеку для генерации UUID
 // const { v4: uuidv4 } = require('uuid');
 // uuidv4();
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+// import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 
 const playPauseBtn = document.querySelector(".play-pause-btn");
@@ -97,6 +97,14 @@ timelineTouch.addEventListener("click", (e) => {
     const rect = timelineTouch.getBoundingClientRect();
     const percent = (e.clientX - rect.left) / rect.width;
     video.currentTime = percent * video.duration;
+    const videoUrl = videoUrlInput.value;
+    const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+    if(videoUrl == '') {
+      storedVideoIds[defaultVideoUrl] = (percent * video.duration).toString();
+    } else {
+      storedVideoIds[videoUrl] = (percent * video.duration).toString();
+    }
+    localStorage.setItem("videoIds", JSON.stringify(storedVideoIds));
   }
 });
 
@@ -156,6 +164,13 @@ video.addEventListener("pause", () => {
 });
 
 video.addEventListener("loadeddata", () => {
+  const videoUrl = videoUrlInput.value;
+  const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+  if(videoUrl == '') {
+    video.currentTime = storedVideoIds[defaultVideoUrl] ?? 0
+  } else {
+    video.currentTime = storedVideoIds[videoUrl] ?? 0
+  }
   totalTimeElem.textContent = formatDuration(video.duration);
 });
 
@@ -428,10 +443,10 @@ function loadVideoFromUrl() {
     videoId = storedVideoIds[videoUrl];
   } else {
     // Generate a new video ID
-    videoId = uuidv4();
+    // videoId = uuidv4();
 
     // Save the new video ID to local storage
-    saveVideoIdToLocalstorage(videoUrl, videoId);
+    saveVideoIdToLocalstorage(videoUrl);
   }
 
   const correctedVideoUrl = correctVideoUrl(videoUrl);
@@ -446,21 +461,14 @@ function loadVideoFromUrl() {
   } else {
     console.error("Unsupported video format");
   }
-  document.onload(() => {
-    const videoUrl = videoUrlInput.value;
-    const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
-    if(videoUrl == '') {
-      video.currentTime = storedVideoIds[defaultVideoUrl]
-    } else {
-      video.currentTime = storedVideoIds[videoUrl]
-    }
-  })
+
   video.addEventListener("loadedmetadata", () => {
     // Check if video progress is stored in local storage
-    const storedVideoProgress = JSON.parse(localStorage.getItem("videoProgress")) || {};
-    if (storedVideoProgress[videoUrl]) {
+    const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+    console.log(storedVideoIds)
+    if (storedVideoIds[videoUrl]) {
       // Restore video progress from local storage
-      video.currentTime = parseFloat(storedVideoProgress[videoUrl]);
+      video.currentTime = parseFloat(storedVideoIds[videoUrl]);
     } else {
       video.pause();
     }
@@ -469,26 +477,42 @@ function loadVideoFromUrl() {
   console.log(`Video URL: ${videoUrl}, Video ID: ${videoId}`);
 }
 
-function saveVideoIdToLocalstorage(videoUrl, videoId) {
+function saveVideoIdToLocalstorage(videoUrl) {
   // Retrieve existing video IDs from local storage
   const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
 
   // Save the new video ID
-  storedVideoIds[videoUrl] = videoId;
+  storedVideoIds[videoUrl] = videoUrl;
 
   // Update local storage with the new video IDs
   localStorage.setItem("videoIds", JSON.stringify(storedVideoIds));
 }
 
-video.addEventListener("timeupdate", () => {
-  // Save the video progress to local storage
+window.addEventListener('unload', () => {
   const videoUrl = videoUrlInput.value;
-  const storedVideoProgress = JSON.parse(localStorage.getItem("videoProgress")) || {};
-  storedVideoProgress[videoUrl] = video.currentTime.toString();
-  localStorage.setItem("videoProgress", JSON.stringify(storedVideoProgress));
-});
+  const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+  if(videoUrl == '') {
+    storedVideoIds[defaultVideoUrl] =  video.currentTime.toString();
+  } else {
+    storedVideoIds[videoUrl] = video.currentTime.toString();
+  }
+  localStorage.setItem("videoIds", JSON.stringify(storedVideoIds));
+})
+//     const videoUrl = videoUrlInput.value;
+//     const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+//     if(videoUrl == '') {
+//       video.currentTime = storedVideoIds[defaultVideoUrl]
+//     } else {
+//       video.currentTime = storedVideoIds[videoUrl]
+//     }
+//   // Save the video progress to local storage
+//   // const videoUrl = videoUrlInput.value;
+//   // const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
+//   // storedVideoIds[videoUrl] = video.currentTime.toString();
+//   // localStorage.setItem("videoIds", JSON.stringify(storedVideoIds));
+// });
 
-//
+// //
 function getVideoType(url) {
   if (url.endsWith(".mp4")) {
     return "mp4";
@@ -543,16 +567,15 @@ function correctVideoUrl(url) {
 
 
  // Проверяем, есть ли сохраненная позиция в localStorage
- if (localStorage.getItem('videoPosition')) {
-  // Устанавливаем текущее время видео из localStorage
-  video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
-}
+//  if (localStorage.getItem('videoPosition')) {
+//   // Устанавливаем текущее время видео из localStorage
+//   video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
+// }
 
-video.addEventListener("timeupdate", () => {
-  localStorage.setItem('videoPosition', video.currentTime.toString());
-});
+// video.addEventListener("timeupdate", () => {
+//   localStorage.setItem('videoPosition', video.currentTime.toString());
+// });
 
 
 // import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 // console.log(uuidv4());
-
