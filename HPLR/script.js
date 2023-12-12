@@ -142,15 +142,8 @@ fullScreenBtn.addEventListener("click", toggleFullScreenMode);
 miniPlayerBtn.addEventListener("click", toggleMiniPlayerMode);
 
 playPauseBtn.addEventListener("click", togglePlay);
-// video.addEventListener("click", (e) => {
-//   if (e.pointerType === "mouse") {
-//     togglePlay();
-//   }
-// });
-
 video.addEventListener("click", (e) => {
-  const isMouseClick = e.type === "click" && e.detail === 1;
-  if (isMouseClick) {
+  if (e.type === "click" && !('ontouchstart' in window || navigator.msMaxTouchPoints)) {
     togglePlay();
   }
 });
