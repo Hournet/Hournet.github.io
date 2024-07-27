@@ -266,7 +266,7 @@ video {
   font-size: 13px;
   color: #fff;
   pointer-events: none;
-  transform: translateX(50%);
+  /* transform: translateX(50%); */
   z-index: 999;
 }
 

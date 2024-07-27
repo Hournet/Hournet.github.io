@@ -45,7 +45,6 @@ document.addEventListener("mouseup", () => {
 });
 
 //timeLine show current time
-timelineTouch.addEventListener("mousemove",(e) => {
 timelineTouch.addEventListener("mousemove", (e) => {
   let offsetX = e.offsetX;
   let timelineWidth = timelineTouch.clientWidth;
@@ -57,16 +56,16 @@ timelineTouch.addEventListener("mousemove", (e) => {
   const currentTime = percent * video.duration;
 
   const progressTime = timelineTouch.querySelector(".span"); // Поправил на ".span"
-  const spanWidth = progressTime.clientWidth;
+  const spanWidth = progressTime.getBoundingClientRect().width;
   const maxLeft = timelineWidth - spanWidth;
-  let spanLeft = offsetX - spanWidth / 2;
+  const time = formatDuration(currentTime);
+  let spanLeft = offsetX - time.replace(":", "").length;
   
   // Ограничиваем spanLeft в диапазоне от 0 до maxLeft
   spanLeft = Math.max(0, Math.min(spanLeft, maxLeft));
 
   progressTime.style.left = `${spanLeft}px`;
-  progressTime.innerText = formatDuration(currentTime);
-});
+  progressTime.innerText = time;
 });
 
 //
