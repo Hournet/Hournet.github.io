@@ -54,11 +54,9 @@ timelineTouch.addEventListener("mousemove", (e) => {
 
   const percent = offsetX / timelineWidth;
   const currentTime = percent * video.duration;
-
-  const progressTime = timelineTouch.querySelector(".span"); // Поправил на ".span"
-  const spanWidth = progressTime.getBoundingClientRect().width;
-  const maxLeft = timelineWidth - spanWidth / 2;
   const time = formatDuration(currentTime);
+  const progressTime = timelineTouch.querySelector(".span"); // Поправил на ".span"
+  const maxLeft = videoContainer.clientWidth - progressTime.clientWidth;
   let spanLeft = offsetX - time.replace(":", "").length;
   
   // Ограничиваем spanLeft в диапазоне от 0 до maxLeft
