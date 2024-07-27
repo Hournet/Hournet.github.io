@@ -57,7 +57,7 @@ timelineTouch.addEventListener("mousemove", (e) => {
 
   const progressTime = timelineTouch.querySelector(".span"); // Поправил на ".span"
   const spanWidth = progressTime.getBoundingClientRect().width;
-  const maxLeft = timelineWidth - spanWidth;
+  const maxLeft = timelineWidth - spanWidth / 2;
   const time = formatDuration(currentTime);
   let spanLeft = offsetX - time.replace(":", "").length;
   
