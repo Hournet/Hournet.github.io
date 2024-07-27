@@ -105,6 +105,7 @@ video {
   gap: .5rem;
   padding: .25rem;
   align-items: center;
+
 }
 
 .video-controls-container .controls .button {
@@ -226,6 +227,10 @@ video {
 .duration-container .separator {
   color: gray;
   font-size: 0.7rem;
+}
+
+.controls_bottom_right{
+  display: flex;
 }
 
 .video-container.captions .captions-btn {

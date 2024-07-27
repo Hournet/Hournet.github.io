@@ -159,11 +159,20 @@ video.addEventListener("pause", () => {
 video.addEventListener("loadeddata", () => {
   const videoUrl = videoUrlInput.value;
   const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
-  if(videoUrl == '') {
-    video.currentTime = storedVideoIds[defaultVideoUrl] ?? 0
+  let currentTime;
+
+  if (videoUrl == '') {
+    currentTime = storedVideoIds[defaultVideoUrl] ?? 0;
   } else {
-    video.currentTime = storedVideoIds[videoUrl] ?? 0
+    currentTime = storedVideoIds[videoUrl] ?? 0;
   }
+
+  if (isFinite(currentTime)) {
+    video.currentTime = currentTime;
+  } else {
+    video.currentTime = 0; // или любое другое значение по умолчанию
+  }
+
   totalTimeElem.textContent = formatDuration(video.duration);
 });
 
@@ -556,6 +565,25 @@ function correctVideoUrl(url) {
 }
 
 
+
+let holdTimeout;
+let isSpeedIncreased = false;
+
+// Добавление возможности увеличения скорости воспроизведения при длительном удерживании
+video.addEventListener("touchstart", (e) => {
+  holdTimeout = setTimeout(() => {
+    video.playbackRate = 2.0;  // увеличиваем скорость
+    isSpeedIncreased = true;
+  }, 1000);  // увеличиваем скорость после 1 секунды удерживания
+});
+
+video.addEventListener("touchend", () => {
+  clearTimeout(holdTimeout);
+  if (isSpeedIncreased) {
+    video.playbackRate = 1.0;  // возвращаем нормальную скорость
+    isSpeedIncreased = false;
+  }
+});
 
 
 
