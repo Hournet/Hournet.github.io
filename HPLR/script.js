@@ -14,6 +14,9 @@ if (isIOS()) {
     videoControlsContainer.style.display = 'none';
   }
 }
+
+//cast
+// Инициализация Google Cast API
 window['__onGCastApiAvailable'] = function(isAvailable) {
   if (isAvailable) {
     initializeCastApi();
@@ -30,11 +33,6 @@ function initializeCastApi() {
   } else {
     console.error('Google Cast SDK не доступен.');
   }
-}
-
-// Проверка и регистрация кастомного элемента `google-cast-button`, если он еще не зарегистрирован
-if (!customElements.get('google-cast-button')) {
-  customElements.define('google-cast-button', class extends HTMLElement {});
 }
 
 const castButton = document.getElementById('castButton');
@@ -67,8 +65,6 @@ function getVideoMimeType(url) {
     default: return 'video/mp4';
   }
 }
-
-
 
 
 //
