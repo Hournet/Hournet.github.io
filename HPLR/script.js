@@ -14,29 +14,38 @@ if (isIOS()) {
     videoControlsContainer.style.display = 'none';
   }
 }
-
-//cast
 window['__onGCastApiAvailable'] = function(isAvailable) {
   if (isAvailable) {
-      initializeCastApi();
+    initializeCastApi();
   }
 };
 
 function initializeCastApi() {
-  const castContext = cast.framework.CastContext.getInstance();
-  castContext.setOptions({
+  if (typeof cast !== 'undefined' && cast.framework) {
+    const castContext = cast.framework.CastContext.getInstance();
+    castContext.setOptions({
       receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
       autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
-  });
+    });
+  } else {
+    console.error('Google Cast SDK не доступен.');
+  }
+}
+
+// Проверка и регистрация кастомного элемента `google-cast-button`, если он еще не зарегистрирован
+if (!customElements.get('google-cast-button')) {
+  customElements.define('google-cast-button', class extends HTMLElement {});
 }
 
 const castButton = document.getElementById('castButton');
-castButton.addEventListener('click', function() {
+if (castButton) {
+  castButton.addEventListener('click', function() {
     const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
     if (castSession) {
-        loadMedia();
+      loadMedia();
     }
-});
+  });
+}
 
 function loadMedia() {
   const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
@@ -44,20 +53,21 @@ function loadMedia() {
 
   const request = new chrome.cast.media.LoadRequest(mediaInfo);
   castSession.loadMedia(request).then(
-      function() { console.log('Media loaded successfully'); },
-      function(errorCode) { console.log('Error loading media: ' + errorCode); }
+    function() { console.log('Media loaded successfully'); },
+    function(errorCode) { console.log('Error loading media: ' + errorCode); }
   );
 }
 
 function getVideoMimeType(url) {
   const extension = url.split('.').pop();
-  switch(extension) {
-      case 'mp4': return 'video/mp4';
-      case 'm3u8': return 'application/x-mpegURL';
-      case 'mpd': return 'application/dash+xml';
-      default: return 'video/mp4';
+  switch (extension) {
+    case 'mp4': return 'video/mp4';
+    case 'm3u8': return 'application/x-mpegURL';
+    case 'mpd': return 'application/dash+xml';
+    default: return 'video/mp4';
   }
 }
+
 
 
 
