@@ -3,17 +3,17 @@
 // uuidv4();
 // import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 // Функция для проверки устройства на iOS
-function isIOS() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-}
+// function isIOS() {
+//   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+// }
 
-// Скрытие элементов управления видео на iOS
-if (isIOS()) {
-  const videoControlsContainer = document.querySelector('.video-controls-container');
-  if (videoControlsContainer) {
-    videoControlsContainer.style.display = 'none';
-  }
-}
+// // Скрытие элементов управления видео на iOS
+// if (isIOS()) {
+//   const videoControlsContainer = document.querySelector('.video-controls-container');
+//   if (videoControlsContainer) {
+//     videoControlsContainer.style.display = 'none';
+//   }
+// }
 
 //cast
 
