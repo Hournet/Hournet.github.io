@@ -16,55 +16,7 @@ if (isIOS()) {
 }
 
 //cast
-// Инициализация Google Cast API
-window['__onGCastApiAvailable'] = function(isAvailable) {
-  if (isAvailable) {
-    initializeCastApi();
-  }
-};
 
-function initializeCastApi() {
-  if (typeof cast !== 'undefined' && cast.framework) {
-    const castContext = cast.framework.CastContext.getInstance();
-    castContext.setOptions({
-      receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
-      autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
-    });
-  } else {
-    console.error('Google Cast SDK не доступен.');
-  }
-}
-
-const castButton = document.getElementById('castButton');
-if (castButton) {
-  castButton.addEventListener('click', function() {
-    const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-    if (castSession) {
-      loadMedia();
-    }
-  });
-}
-
-function loadMedia() {
-  const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-  const mediaInfo = new chrome.cast.media.MediaInfo(video.src, getVideoMimeType(video.src));
-
-  const request = new chrome.cast.media.LoadRequest(mediaInfo);
-  castSession.loadMedia(request).then(
-    function() { console.log('Media loaded successfully'); },
-    function(errorCode) { console.log('Error loading media: ' + errorCode); }
-  );
-}
-
-function getVideoMimeType(url) {
-  const extension = url.split('.').pop();
-  switch (extension) {
-    case 'mp4': return 'video/mp4';
-    case 'm3u8': return 'application/x-mpegURL';
-    case 'mpd': return 'application/dash+xml';
-    default: return 'video/mp4';
-  }
-}
 
 
 //
