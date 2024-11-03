@@ -5,3 +5,4 @@ requests_html==0.10.0
 tqdm==4.66.3
 uvicorn==0.13.3
 html5lib==1.1
+lxml-html-clean==0.3.1
