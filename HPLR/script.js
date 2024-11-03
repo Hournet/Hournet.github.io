@@ -449,7 +449,7 @@ const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // 
 loadHlsVideo(defaultVideoUrl);
 function loadVideoFromUrl() {
   const videoUrl = videoUrlInput.value;
-  searchHD("https://rezka-ua.tv", videoUrl)
+  console.log(searchHD("https://rezka-ua.tv", videoUrl))
   let videoId;
 
   // Check if the video URL has an associated ID in local storage
