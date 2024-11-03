@@ -17,10 +17,7 @@
 
 //cast
 
-
-
 //
-
 
 const playPauseBtn = document.querySelector(".play-pause-btn");
 const fullScreenBtn = document.querySelector(".full-screen-btn");
@@ -76,7 +73,7 @@ timelineTouch.addEventListener("mousemove", (e) => {
   const progressTime = timelineTouch.querySelector(".span"); // Поправил на ".span"
   const maxLeft = videoContainer.clientWidth - progressTime.clientWidth;
   let spanLeft = offsetX - time.replace(":", "").length;
-  
+
   // Ограничиваем spanLeft в диапазоне от 0 до maxLeft
   spanLeft = Math.max(0, Math.min(spanLeft, maxLeft));
 
@@ -85,12 +82,12 @@ timelineTouch.addEventListener("mousemove", (e) => {
 });
 
 //
-timelineTouch.addEventListener('mouseenter', () => {
-  spanElement.style.display = 'block';
+timelineTouch.addEventListener("mouseenter", () => {
+  spanElement.style.display = "block";
 });
 
-timelineTouch.addEventListener('mouseleave', () => {
-  spanElement.style.display = 'none';
+timelineTouch.addEventListener("mouseleave", () => {
+  spanElement.style.display = "none";
 });
 //
 
@@ -104,8 +101,6 @@ timelineTouch.addEventListener('mouseleave', () => {
 // progressTime.innerText = formatDuration(percent);
 // });
 
-
-
 timelineTouch.addEventListener("click", (e) => {
   // Проверяем, является ли устройство мышью
   if (e.pointerType === "mouse") {
@@ -114,7 +109,7 @@ timelineTouch.addEventListener("click", (e) => {
     video.currentTime = percent * video.duration;
     const videoUrl = videoUrlInput.value;
     const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
-    if(videoUrl == '') {
+    if (videoUrl == "") {
       storedVideoIds[defaultVideoUrl] = (percent * video.duration).toString();
     } else {
       storedVideoIds[videoUrl] = (percent * video.duration).toString();
@@ -158,7 +153,10 @@ miniPlayerBtn.addEventListener("click", toggleMiniPlayerMode);
 
 playPauseBtn.addEventListener("click", togglePlay);
 video.addEventListener("click", (e) => {
-  if (e.type === "click" && !('ontouchstart' in window || navigator.msMaxTouchPoints)) {
+  if (
+    e.type === "click" &&
+    !("ontouchstart" in window || navigator.msMaxTouchPoints)
+  ) {
     togglePlay();
   }
 });
@@ -176,7 +174,7 @@ video.addEventListener("loadeddata", () => {
   const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
   let currentTime;
 
-  if (videoUrl == '') {
+  if (videoUrl == "") {
     currentTime = storedVideoIds[defaultVideoUrl] ?? 0;
   } else {
     currentTime = storedVideoIds[videoUrl] ?? 0;
@@ -216,7 +214,7 @@ video.addEventListener("volumechange", () => {
 document.addEventListener("fullscreenchange", () => {
   const isFullScreen = document.fullscreenElement == null;
   fullScreenBtn.classList.toggle("full-screen", isFullScreen);
-  });
+});
 
 video.addEventListener("enterpictureinpicture", () => {
   videoContainer.classList.add("mini-player");
@@ -377,7 +375,6 @@ const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
 let lastTapTime = 0;
 
 video.addEventListener("click", function (event) {
-
   const currentTime = new Date().getTime();
   if (currentTime - lastTapTime < 300) {
     const tapX = event.clientX;
@@ -452,6 +449,7 @@ const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // 
 loadHlsVideo(defaultVideoUrl);
 function loadVideoFromUrl() {
   const videoUrl = videoUrlInput.value;
+  searchHD("https://rezka-ua.tv", videoUrl)
   let videoId;
 
   // Check if the video URL has an associated ID in local storage
@@ -482,7 +480,7 @@ function loadVideoFromUrl() {
   video.addEventListener("loadedmetadata", () => {
     // Check if video progress is stored in local storage
     const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
-    console.log(storedVideoIds)
+    console.log(storedVideoIds);
     if (storedVideoIds[videoUrl]) {
       // Restore video progress from local storage
       video.currentTime = parseFloat(storedVideoIds[videoUrl]);
@@ -505,16 +503,16 @@ function saveVideoIdToLocalstorage(videoUrl) {
   localStorage.setItem("videoIds", JSON.stringify(storedVideoIds));
 }
 
-window.addEventListener('unload', () => {
+window.addEventListener("unload", () => {
   const videoUrl = videoUrlInput.value;
   const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
-  if(videoUrl == '') {
-    storedVideoIds[defaultVideoUrl] =  video.currentTime.toString();
+  if (videoUrl == "") {
+    storedVideoIds[defaultVideoUrl] = video.currentTime.toString();
   } else {
     storedVideoIds[videoUrl] = video.currentTime.toString();
   }
   localStorage.setItem("videoIds", JSON.stringify(storedVideoIds));
-})
+});
 //     const videoUrl = videoUrlInput.value;
 //     const storedVideoIds = JSON.parse(localStorage.getItem("videoIds")) || {};
 //     if(videoUrl == '') {
@@ -579,30 +577,26 @@ function correctVideoUrl(url) {
   return url;
 }
 
-
-
 let holdTimeout;
 let isSpeedIncreased = false;
 
 // Добавление возможности увеличения скорости воспроизведения при длительном удерживании
 video.addEventListener("touchstart", (e) => {
   holdTimeout = setTimeout(() => {
-    video.playbackRate = 2.0;  // увеличиваем скорость
+    video.playbackRate = 2.0; // увеличиваем скорость
     isSpeedIncreased = true;
-  }, 1000);  // увеличиваем скорость после 1 секунды удерживания
+  }, 1000); // увеличиваем скорость после 1 секунды удерживания
 });
 
 video.addEventListener("touchend", () => {
   clearTimeout(holdTimeout);
   if (isSpeedIncreased) {
-    video.playbackRate = 1.0;  // возвращаем нормальную скорость
+    video.playbackRate = 1.0; // возвращаем нормальную скорость
     isSpeedIncreased = false;
   }
 });
 
-
-
- // Проверяем, есть ли сохраненная позиция в localStorage
+// Проверяем, есть ли сохраненная позиция в localStorage
 //  if (localStorage.getItem('videoPosition')) {
 //   // Устанавливаем текущее время видео из localStorage
 //   video.currentTime = parseFloat(localStorage.getItem('videoPosition'));
@@ -612,6 +606,48 @@ video.addEventListener("touchend", () => {
 //   localStorage.setItem('videoPosition', video.currentTime.toString());
 // });
 
-
 // import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 // console.log(uuidv4());
+
+async function searchHD(mirror, query, page = 1) {
+  const searchUrl = `${mirror}/search/?do=search&subaction=search&q=${query}&page=${page}`;
+  try {
+    const response = await fetch(searchUrl, {
+      method: "GET",
+      headers: {
+        // Add necessary headers here if required.
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch content from ${searchUrl}: ${response.statusText}`
+      );
+    }
+
+    const htmlText = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlText, "text/html");
+
+    const contentItems = Array.from(
+      doc.querySelectorAll("div.b-content__inline_item")
+    ).map((content) => getContentInfo(content));
+
+    return contentItems;
+  } catch (error) {
+    console.error("Error fetching content:", error);
+    return [];
+  }
+}
+
+function getContentInfo(content) {
+  // Example extraction; modify based on content structure
+  const title =
+    content.querySelector(".b-content__inline_item-link")?.textContent.trim() ||
+    "No Title";
+  const link =
+    content.querySelector(".b-content__inline_item-link")?.href || "#";
+
+  // Extract additional info as needed
+  return { title, link };
+}
