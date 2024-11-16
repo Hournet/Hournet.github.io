@@ -1,18 +1,19 @@
-
-  {
-    "name": "hournet",
+{
+    "name": "puppeteer-search-server",
     "version": "1.0.0",
-    "main": "server2.js",
-    "type": "module",
+    "description": "Сервер для поиска с использованием Puppeteer",
+    "main": "server.js",
     "scripts": {
-      "start": "node server2.js"
+      "start": "node server.js",
+      "build": "echo 'No build step required'"
     },
-  
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.12"
-  },
-  "engines": {
-    "node": "20.x"
+    "dependencies": {
+      "puppeteer": "^21.3.4",
+      "http": "^0.0.1-security"
+    },
+    "engines": {
+      "node": ">=16.0.0"
+    },
+    "author": "Hournet",
+    "license": "ISC"
   }
-}
-
