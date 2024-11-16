@@ -15,7 +15,7 @@
 //   }
 // }
 
-//cast
+//cast`
 
 //
 
@@ -449,7 +449,9 @@ const defaultVideoUrl = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // 
 loadHlsVideo(defaultVideoUrl);
 function loadVideoFromUrl() {
   const videoUrl = videoUrlInput.value;
-  console.log(searchHD("https://rezka-ua.tv", videoUrl))
+  fetch('https://hplr.onrender.com/api/search?' + videoUrl, {
+    method: "GET",
+  }).then(x => console.log(x));
   let videoId;
 
   // Check if the video URL has an associated ID in local storage
@@ -608,46 +610,3 @@ video.addEventListener("touchend", () => {
 
 // import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 // console.log(uuidv4());
-
-async function searchHD(mirror, query, page = 1) {
-  const searchUrl = `${mirror}/search/?do=search&subaction=search&q=${query}&page=${page}`;
-  try {
-    const response = await fetch(searchUrl, {
-      method: "GET",
-      headers: {
-        // Add necessary headers here if required.
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch content from ${searchUrl}: ${response.statusText}`
-      );
-    }
-
-    const htmlText = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlText, "text/html");
-
-    const contentItems = Array.from(
-      doc.querySelectorAll("div.b-content__inline_item")
-    ).map((content) => getContentInfo(content));
-
-    return contentItems;
-  } catch (error) {
-    console.error("Error fetching content:", error);
-    return [];
-  }
-}
-
-function getContentInfo(content) {
-  // Example extraction; modify based on content structure
-  const title =
-    content.querySelector(".b-content__inline_item-link")?.textContent.trim() ||
-    "No Title";
-  const link =
-    content.querySelector(".b-content__inline_item-link")?.href || "#";
-
-  // Extract additional info as needed
-  return { title, link };
-}

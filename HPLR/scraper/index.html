@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Поиск</title>
+</head>
+<body>
+  <input type="text" id="searchInput" placeholder="Введите название" autocomplete="off">
+  <ul id="results"></ul>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const resultsContainer = document.getElementById('results');
+
+    searchInput.addEventListener('input', async () => {
+      const query = searchInput.value.trim();
+      if (query.length === 0) {
+        resultsContainer.innerHTML = '';
+        return;
+      }
+
+      try {
+        const response = await fetch(`/search?query=${encodeURIComponent(query)}`);
+        if (response.ok) {
+          const data = await response.json();
+          resultsContainer.innerHTML = '';
+
+          data.items.forEach(item => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = item.url;
+            link.textContent = item.title;
+            listItem.appendChild(link);
+            resultsContainer.appendChild(listItem);
+          });
+
+          if (data.seeAll) {
+            const seeAllItem = document.createElement('li');
+            const seeAllLink = document.createElement('a');
+            seeAllLink.href = data.seeAll.url;
+            seeAllLink.textContent = data.seeAll.text;
+            seeAllItem.appendChild(seeAllLink);
+            resultsContainer.appendChild(seeAllItem);
+          }
+        } else {
+          resultsContainer.innerHTML = 'Ошибка при получении данных.';
+        }
+      } catch (error) {
+        resultsContainer.innerHTML = 'Ошибка сети.';
+        console.error('Ошибка запроса:', error);
+      }
+    });
+  </script>
+</body>
+</html>
