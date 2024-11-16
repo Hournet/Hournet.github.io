@@ -1,9 +1,23 @@
-{
-  "type": "module",
+
+  {
+    "name": "hournet",
+    "version": "1.0.0",
+    "main": "server2.js",
+    "type": "module",
+    "scripts": {
+      "start": "node server2.js"
+    },
+  
   "dependencies": {
     "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.12",
-    "puppeteer": "^23.7.1"
+    "puppeteer": "^23.7.1",
+    "node-fetch": "^3.0.0",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
 
