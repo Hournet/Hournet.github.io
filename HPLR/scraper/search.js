@@ -4,6 +4,17 @@ const baseUrl = 'https://rezka-ua.tv/'
 const api = 'engine/ajax/search.php'
 const url = new URL(api, baseUrl)
 
+function generateRandomIPAddress() {
+  const octet1 = Math.floor(Math.random() * 256);
+  const octet2 = Math.floor(Math.random() * 256);
+  const octet3 = Math.floor(Math.random() * 256);
+  const octet4 = Math.floor(Math.random() * 256);
+
+  const ipAddress = `${octet1}.${octet2}.${octet3}.${octet4}`;
+
+  return ipAddress;
+}
+
 const search = async (query) => {
   const formData = new URLSearchParams();
   formData.append('q', query);
@@ -13,6 +24,7 @@ const search = async (query) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
+      'X-Forwarded-For': generateRandomIPAddress()
     },
     body: formData,
   });
