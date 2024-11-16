@@ -22,6 +22,6 @@ const server = createServer(async (req, res) => {
   }
 });
 
-server.listen(3300, () => {
-  console.log('Server started at http://localhost:3300');
+server.listen(process.env.PORT || 3300, () => {
+  console.log('Server started');
 });
